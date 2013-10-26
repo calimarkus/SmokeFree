@@ -16,9 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bgImage;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
-
-@property (weak, nonatomic) IBOutlet UIImageView *positiveImage;
-@property (weak, nonatomic) IBOutlet UIImageView *negativeImage;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) IBOutlet LineChartView *lineChartView;
 

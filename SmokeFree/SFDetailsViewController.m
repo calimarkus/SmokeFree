@@ -43,23 +43,27 @@
 
 - (void)setDidReachTarget:(BOOL)didReachTarget;
 {
+    CGPoint imageCenter = self.imageView.center;
+    
     if (didReachTarget) {
         self.bgImage.tintColor = [UIColor smokeFreeGreen];
         self.titleLabel.text = @"That's how we roll!";
         self.subTitleLabel.text = @"You reached your goal today!";
-        self.positiveImage.hidden = NO;
-        self.negativeImage.hidden = YES;
+        self.imageView.image = [UIImage imageNamed:@"details_positive"];
     } else {
         self.bgImage.tintColor = [UIColor smokeFreeRed];
         self.titleLabel.text = @"Come on!";
         if (self.value < 1.0) {
             self.subTitleLabel.text = @"So close… tomorrow you can do it!";
+            self.imageView.image = [UIImage imageNamed:@"details_neutral"];
         } else {
             self.subTitleLabel.text = @"You can do better! You wanted this, no?";
+            self.imageView.image = [UIImage imageNamed:@"details_negative"];
         }
-        self.positiveImage.hidden = YES;
-        self.negativeImage.hidden = NO;
     }
+    
+    [self.imageView sizeToFit];
+    self.imageView.center = imageCenter;
 }
 
 - (void)reloadChartData;
