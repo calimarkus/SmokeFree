@@ -20,4 +20,9 @@
     return [UIColor colorWithRed:0.55f green:0.78f blue:0.25f alpha:1.00f];
 }
 
++ (UIColor*)smokeFreeRed;
+{
+    return [UIColor colorWithRed:0.94f green:0.13f blue:0.00f alpha:1.00f];
+}
+
 @end

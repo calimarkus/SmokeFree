@@ -27,7 +27,7 @@
     if (self) {
         self.title = [@"Mike" uppercaseString];
         
-        self.data = @[@(0.12),@(1.24),@(-4.23), @(2.41), @(4.21), @(7.23)];
+        self.data = @[@(0.12),@(-1.24),@(-4.23), @(2.41), @(4.21), @(-7.23)];
         self.dateFormatter = [[NSDateFormatter alloc] init];
         [self.dateFormatter setDateFormat:@"EEEE"];
         
@@ -95,7 +95,7 @@
 
 - (void)refreshTriggered:(UIRefreshControl*)refreshControl;
 {
-    self.data = [self.data arrayByAddingObject:@((arc4random()%1000)/100.0)];
+    self.data = [self.data arrayByAddingObject:@((arc4random()%1000)/100.0-5.0)];
     
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -148,8 +148,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     SFProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:[SFProfileCell reuseIdentifier]];
-    cell.accessoryLabel.text = [NSString stringWithFormat: @"%.1f %%", [self.data[indexPath.row] floatValue]];
     
+    // update percentage
+    CGFloat value = [self.data[indexPath.row] floatValue];
+    cell.accessoryLabel.text = [NSString stringWithFormat: @"%.1f %%", value];
+    cell.accessoryLabel.textColor = (value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
+    
+    // update day label
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:-60*60*24*indexPath.row];
     cell.mainLabel.text = [self.dateFormatter stringFromDate:date];
     

@@ -16,8 +16,6 @@
     
     self.backgroundColor = [UIColor clearColor];
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    self.accessoryLabel.textColor = [UIColor smokeFreeGreen];
 }
 
 + (CGFloat)preferredHeight;

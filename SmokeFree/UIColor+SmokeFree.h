@@ -12,5 +12,6 @@
 
 + (UIColor*)smokeFreeBlue;
 + (UIColor*)smokeFreeGreen;
++ (UIColor*)smokeFreeRed;
 
 @end
