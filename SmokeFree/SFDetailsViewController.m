@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
     
+    // seutp view
     self.view.backgroundColor = [UIColor whiteColor];
     self.bgImage.image = [[UIImage imageNamed:@"bg_details"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self setDidReachTarget:(self.value < 0)];
@@ -30,7 +31,14 @@
         self.topView.frameY = 0;
     } completion:nil];
     
-    [self addChart];
+    // replace line chart view (so correct initalizer is used)
+    [self.lineChartView removeFromSuperview];
+    self.lineChartView = [[LineChartView alloc] initWithFrame:self.lineChartView.frame];
+    self.lineChartView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view insertSubview:self.lineChartView belowSubview:self.topView];
+    
+    // update data
+    [self reloadChartData];
 }
 
 - (void)setDidReachTarget:(BOOL)didReachTarget;
@@ -54,39 +62,58 @@
     }
 }
 
-- (void)addChart;
+- (void)reloadChartData;
 {
-    LineChartData *d = [LineChartData new];
-    d.xMin = 1;
-    d.xMax = 31;
-    d.title = @"The title for the legend";
-    d.color = [UIColor redColor];
-    d.itemCount = 10;
+    LineChartData *actualData = [LineChartData new];
+    actualData.xMin = 1;
+    actualData.xMax = 31;
+    actualData.title = @"Smoke Amount";
+    actualData.color = (self.value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
+    actualData.itemCount = 10;
     
-    NSMutableArray *vals = [NSMutableArray new];
-    for(NSUInteger i = 0; i < d.itemCount; ++i) {
-        [vals addObject:@((rand() / (float)RAND_MAX) * (31 - 1) + 1)];
+    NSMutableArray *actualValues = [NSMutableArray new];
+    for(NSUInteger i = 0; i < actualData.itemCount; ++i) {
+        [actualValues addObject:@((rand() / (float)RAND_MAX) * (31 - 1) + 1)];
     }
-    [vals sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    [actualValues sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [obj1 compare:obj2];
     }];
-    d.getData = ^(NSUInteger item) {
-        float x = [vals[item] floatValue];
+    actualData.getData = ^(NSUInteger item) {
+        float x = [actualValues[item] floatValue];
         float y = powf(2, x / 7);
         NSString *label1 = [NSString stringWithFormat:@"%d", item];
         NSString *label2 = [NSString stringWithFormat:@"%f", y];
         return [LineChartDataItem dataItemWithX:x y:y xLabel:label1 dataLabel:label2];
     };
     
-    LineChartView *chartView = [[LineChartView alloc] initWithFrame:CGRectMake(20, 350, 300, 300)];
-    chartView.yMin = 0;
-    chartView.yMax = powf(2, 31 / 7) + 0.5;
-    chartView.ySteps = @[@"0.0",
-                         [NSString stringWithFormat:@"%.02f", chartView.yMax / 2],
-                         [NSString stringWithFormat:@"%.02f", chartView.yMax]];
-    chartView.data = @[d];
+    LineChartData *goalData = [LineChartData new];
+    goalData.xMin = 1;
+    goalData.xMax = 31;
+    goalData.title = @"Goal";
+    goalData.color = [UIColor colorWithWhite:0.66 alpha:1.0];
+    goalData.itemCount = 10;
     
-    [self.view addSubview:chartView];
+    NSMutableArray *goalValues = [NSMutableArray new];
+    for(NSUInteger i = 0; i < goalData.itemCount; ++i) {
+        [goalValues addObject:@((rand() / (float)RAND_MAX) * (31 - 1) + 1)];
+    }
+    [goalValues sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2];
+    }];
+    goalData.getData = ^(NSUInteger item) {
+        float x = [goalValues[item] floatValue];
+        float y = powf(2, x / 7);
+        NSString *label1 = [NSString stringWithFormat:@"%d", item];
+        NSString *label2 = [NSString stringWithFormat:@"%f", y];
+        return [LineChartDataItem dataItemWithX:x y:y xLabel:label1 dataLabel:label2];
+    };
+    
+    self.lineChartView.yMin = 0;
+    self.lineChartView.yMax = powf(2, 31 / 7) + 0.5;
+    self.lineChartView.ySteps = @[@"0.0",
+                         [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax / 2],
+                         [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax]];
+    self.lineChartView.data = @[actualData, goalData];
 }
 
 @end

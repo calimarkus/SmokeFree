@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class LineChartView;
+
 @interface SFDetailsViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -17,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *positiveImage;
 @property (weak, nonatomic) IBOutlet UIImageView *negativeImage;
+
+@property (strong, nonatomic) IBOutlet LineChartView *lineChartView;
 
 @property (nonatomic, assign) CGFloat value;
 

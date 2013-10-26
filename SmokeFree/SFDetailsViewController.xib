@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SFDetailsViewController">
             <connections>
                 <outlet property="bgImage" destination="jI7-5V-XO2" id="Pt5-ua-GL2"/>
+                <outlet property="lineChartView" destination="YYS-dN-56l" id="zx0-5T-ZTr"/>
                 <outlet property="negativeImage" destination="44A-k2-eu1" id="lJd-Fw-VZY"/>
                 <outlet property="positiveImage" destination="ZmA-mS-5KC" id="Jbd-Tl-MUl"/>
                 <outlet property="subTitleLabel" destination="kH1-Mb-ZGl" id="RP4-dI-kG7"/>
@@ -52,6 +53,11 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="YYS-dN-56l" customClass="LineChartView">
+                    <rect key="frame" x="0.0" y="314" width="320" height="254"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

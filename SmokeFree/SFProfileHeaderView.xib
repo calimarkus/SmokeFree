@@ -16,7 +16,7 @@
                 </imageView>
                 <view contentMode="scaleToFill" id="hMi-vv-hgZ">
                     <rect key="frame" x="160" y="25" width="115" height="115"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gridBackground" id="LzH-hq-li1">
                             <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
@@ -41,7 +41,7 @@
                 </view>
                 <view contentMode="scaleToFill" id="ewm-Cy-2u6">
                     <rect key="frame" x="103" y="125" width="115" height="115"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gridBackground" id="yHb-Ql-mcX">
                             <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
