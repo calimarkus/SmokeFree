@@ -29,4 +29,13 @@
     self.bottomBoxImageView.tintColor = [UIColor smokeFreeGreen];
 }
 
+- (void)setBoxOffset:(CGFloat)boxOffset;
+{
+    _boxOffset = boxOffset;
+    
+    self.profileImageView.transform = CGAffineTransformMakeTranslation(-boxOffset, -boxOffset);
+    self.rightBox.transform = CGAffineTransformMakeTranslation(boxOffset, -boxOffset);
+    self.bottomBox.transform = CGAffineTransformMakeTranslation(0, boxOffset);
+}
+
 @end

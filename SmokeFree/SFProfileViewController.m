@@ -49,6 +49,12 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 240)];
     [headerView addSubview:self.profileView];
     self.tableView.tableHeaderView = headerView;
+    
+    // animate header in
+    self.profileView.boxOffset = 100.0;
+    [UIView animateWithDuration:0.66 delay:0.1 options:0 animations:^{
+        self.profileView.boxOffset = 0.0;
+    } completion:nil];
 
 }
 
@@ -72,11 +78,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
     CGFloat overshoot = ABS(MAX(0, scrollView.contentOffset.y + 50));
-    CGFloat offset = overshoot/5.0;
-    
-    self.profileView.profileImageView.transform = CGAffineTransformMakeTranslation(-offset, -offset);
-    self.profileView.rightBox.transform = CGAffineTransformMakeTranslation(offset, -offset);
-    self.profileView.bottomBox.transform = CGAffineTransformMakeTranslation(0, offset);
+    self.profileView.boxOffset= overshoot/5.0;
 }
 
 #pragma mark UITableViewDelegate

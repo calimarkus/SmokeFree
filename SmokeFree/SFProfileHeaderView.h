@@ -17,4 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *rightBox;
 @property (weak, nonatomic) IBOutlet UIView *bottomBox;
 
+@property (nonatomic, assign) CGFloat boxOffset;
+
 @end
