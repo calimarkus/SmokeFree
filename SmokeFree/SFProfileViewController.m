@@ -156,7 +156,7 @@
     cell.accessoryLabel.textColor = (value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
     
     // update day label
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:-60*60*24*indexPath.row];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:-60*60*24*(indexPath.row+1)];
     cell.mainLabel.text = [self.dateFormatter stringFromDate:date];
     
     return cell;
