@@ -6,6 +6,8 @@
 //
 //
 
+#import <Fingertips/MBFingerTipWindow.h>
+
 #import "SFStartViewController.h"
 
 #import "SFAppDelegate.h"
@@ -14,7 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[MBFingerTipWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.tintColor = [UIColor smokeFreeBlue];
     [self.window makeKeyAndVisible];
