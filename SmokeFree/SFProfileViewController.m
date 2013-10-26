@@ -35,14 +35,25 @@
 {
     [super viewDidLoad];
     
-    self.tableView.tableHeaderView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil] instantiateWithOwner:nil options:nil][0];
+    SFProfileHeaderView *profileView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil]
+                                        instantiateWithOwner:nil options:nil][0];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 240)];
+    [headerView addSubview:profileView];
+    self.tableView.tableHeaderView = headerView;
+
 }
 
 #pragma mark UITableViewDelegate
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return 12;
+    return (section == 0) ? 0 : 12;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;

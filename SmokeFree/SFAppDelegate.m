@@ -19,7 +19,8 @@
     self.window.tintColor = [UIColor smokeFreeBlue];
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController: [[SFProfileViewController alloc] init]];
+    SFProfileViewController *profileController = [[SFProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:profileController];
     
     return YES;
 }
