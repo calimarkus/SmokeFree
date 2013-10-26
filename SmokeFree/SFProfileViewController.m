@@ -16,6 +16,7 @@
 @interface SFProfileViewController () <MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) SFProfileHeaderView *profileView;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
 @implementation SFProfileViewController
@@ -27,6 +28,7 @@
         self.title = [@"Mike" uppercaseString];
         
         self.data = @[@(0.12),@(1.24),@(-4.23), @(2.41), @(4.21), @(7.23)];
+        self.dateFormatter = [[NSDateFormatter alloc] init];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:self action:@selector(shareButtonTouched:)];
@@ -134,7 +136,7 @@
     cell.accessoryLabel.text = [NSString stringWithFormat: @"%.1f %%", [self.data[indexPath.row] floatValue]];
     
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:-60*60*24*indexPath.row];
-//    cell.mainLabel.text = [NSString stringWithFormat: @"<#string#>", <#param1#>];
+    cell.mainLabel.text = [self.dateFormatter stringFromDate:date];
     
     return cell;
 }
