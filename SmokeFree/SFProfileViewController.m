@@ -29,6 +29,7 @@
         
         self.data = @[@(0.12),@(1.24),@(-4.23), @(2.41), @(4.21), @(7.23)];
         self.dateFormatter = [[NSDateFormatter alloc] init];
+        [self.dateFormatter setDateFormat:@"EEEE"];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:self action:@selector(shareButtonTouched:)];
