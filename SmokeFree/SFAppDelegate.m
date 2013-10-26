@@ -7,6 +7,7 @@
 //
 
 #import <Fingertips/MBFingerTipWindow.h>
+#import <BoxSDK/BoxSDK.h>
 
 #import "SFStartViewController.h"
 
@@ -24,6 +25,16 @@
     UIViewController *firstController = [[SFStartViewController alloc] init];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:firstController];
     
+    [BoxSDK sharedSDK].OAuth2Session.clientID = @"6bqddxhgyukcra68wl6v3gm63t143ng6";
+    [BoxSDK sharedSDK].OAuth2Session.clientSecret = @"mJ3Wh8itMMgkzkYayajqQNYfxC4kdfvO";
+    
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+{
+    [[BoxSDK sharedSDK].OAuth2Session performAuthorizationCodeGrantWithReceivedURL:url];
     return YES;
 }
 

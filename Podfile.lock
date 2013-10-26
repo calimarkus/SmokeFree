@@ -1,4 +1,7 @@
 PODS:
+  - box-ios-sdk-v2 (1.1.1):
+    - box-ios-sdk-v2/no-arc
+  - box-ios-sdk-v2/no-arc (1.1.1)
   - Fingertips (0.3.0)
   - ios-linechart (1.1.0):
     - objc-utils (~> 0.3.3)
@@ -9,10 +12,12 @@ PODS:
   - objc-utils/UIKit (0.3.3)
 
 DEPENDENCIES:
+  - box-ios-sdk-v2
   - Fingertips
   - ios-linechart
 
 SPEC CHECKSUMS:
+  box-ios-sdk-v2: de6c9394065a5c54ce6bac6bab9a1ca9ca6c9954
   Fingertips: ba4141dcd79c0474bb51167f039de3473f72a2ca
   ios-linechart: 7c59e33fd157a00fa2f5b63bc37a5d3dc2af80fe
   objc-utils: fe0075f791920ae55b4bc7e199ef7d7130eb1575

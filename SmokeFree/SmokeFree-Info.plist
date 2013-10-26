@@ -34,5 +34,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>boxsdk-6bqddxhgyukcra68wl6v3gm63t143ng6</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

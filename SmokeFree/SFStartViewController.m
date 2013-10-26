@@ -6,6 +6,7 @@
 //
 //
 
+#import <BoxSDK/BoxSDK.h>
 #import "SFProfileViewController.h"
 
 #import "SFStartViewController.h"
@@ -21,8 +22,19 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Smoke Free";
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                               target:self action:@selector(connectWithBoxNet:)];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oAuthComplete:)
+                                                     name:BoxOAuth2OperationDidCompleteNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -44,6 +56,20 @@
 {
     SFProfileViewController *profileController = [[SFProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:profileController animated:YES];
+}
+
+#pragma mark BOX.net
+
+- (void)connectWithBoxNet:(id)sender;
+{
+    UIViewController *authorizationController = [[BoxAuthorizationViewController alloc] initWithAuthorizationURL:
+                                                 [[BoxSDK sharedSDK].OAuth2Session authorizeURL] redirectURI:nil];
+    [self presentViewController:authorizationController animated:YES completion:nil];
+}
+
+- (void)oAuthComplete:(NSNotification*)notification;
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
