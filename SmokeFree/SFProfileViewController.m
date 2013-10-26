@@ -28,7 +28,7 @@
     if (self) {
         self.title = [@"Mike" uppercaseString];
         
-        self.data = @[@(0.12),@(-1.24),@(-4.23), @(2.41), @(4.21), @(-7.23)];
+        self.data = @[@(-1.24),@(0.21),@(4.23), @(-2.41), @(4.21), @(-7.23)];
         self.dateFormatter = [[NSDateFormatter alloc] init];
         [self.dateFormatter setDateFormat:@"EEEE"];
         
