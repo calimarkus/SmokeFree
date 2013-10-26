@@ -1,1 +1,17 @@
+PODS:
+  - ios-linechart (1.1.0):
+    - objc-utils (~> 0.3.3)
+  - objc-utils (0.3.3):
+    - objc-utils/CoreFoundation
+    - objc-utils/UIKit
+  - objc-utils/CoreFoundation (0.3.3)
+  - objc-utils/UIKit (0.3.3)
+
+DEPENDENCIES:
+  - ios-linechart
+
+SPEC CHECKSUMS:
+  ios-linechart: 7c59e33fd157a00fa2f5b63bc37a5d3dc2af80fe
+  objc-utils: fe0075f791920ae55b4bc7e199ef7d7130eb1575
+
 COCOAPODS: 0.27.1
