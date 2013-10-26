@@ -14,11 +14,11 @@
                     <rect key="frame" x="45" y="25" width="115" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask" id="LzH-hq-li1">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gridBackground" id="LzH-hq-li1">
                     <rect key="frame" x="160" y="25" width="115" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask" id="yHb-Ql-mcX">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gridBackground" id="yHb-Ql-mcX">
                     <rect key="frame" x="103" y="125" width="115" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -33,6 +33,7 @@
         </view>
     </objects>
     <resources>
+        <image name="gridBackground" width="115" height="115"/>
         <image name="mask" width="115" height="115"/>
     </resources>
 </document>

@@ -11,7 +11,7 @@
 #import "SFProfileViewController.h"
 
 @interface SFProfileViewController ()
-
+@property (nonatomic, strong) NSArray *data;
 @end
 
 @implementation SFProfileViewController
@@ -21,6 +21,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = [@"Mike" uppercaseString];
+        
+        self.data = @[@(0),@(1),@(2)];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:nil action:nil];
@@ -35,6 +37,10 @@
 {
     [super viewDidLoad];
     
+    // setup Pull To Refresh
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshTriggered:) forControlEvents:UIControlEventValueChanged];
+    
     // add header view
     SFProfileHeaderView *profileView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil]
                                         instantiateWithOwner:nil options:nil][0];
@@ -43,6 +49,20 @@
     [headerView addSubview:profileView];
     self.tableView.tableHeaderView = headerView;
 
+}
+
+#pragma mark UIRefreshControl
+
+- (void)refreshTriggered:(UIRefreshControl*)refreshControl;
+{
+    self.data = [self.data arrayByAddingObject:@(self.data.count)];
+    
+    double delayInSeconds = 0.15;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [refreshControl endRefreshing];
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark UITableViewDelegate
@@ -54,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return (section == 0) ? 0 : 12;
+    return (section == 0) ? 0 : self.data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -75,5 +95,6 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 @end
