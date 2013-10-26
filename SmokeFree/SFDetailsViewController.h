@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *positiveImage;
+@property (weak, nonatomic) IBOutlet UIImageView *negativeImage;
+
 @property (nonatomic, assign) CGFloat value;
 
 @end

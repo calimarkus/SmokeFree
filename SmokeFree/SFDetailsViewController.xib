@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SFDetailsViewController">
             <connections>
                 <outlet property="bgImage" destination="jI7-5V-XO2" id="Pt5-ua-GL2"/>
+                <outlet property="negativeImage" destination="44A-k2-eu1" id="lJd-Fw-VZY"/>
+                <outlet property="positiveImage" destination="ZmA-mS-5KC" id="Jbd-Tl-MUl"/>
                 <outlet property="subTitleLabel" destination="kH1-Mb-ZGl" id="RP4-dI-kG7"/>
                 <outlet property="titleLabel" destination="pQ8-5q-E4d" id="Ll0-DZ-unm"/>
                 <outlet property="topView" destination="QiM-EN-Atk" id="O6P-Rd-fPp"/>
@@ -40,6 +42,14 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details_positive" id="ZmA-mS-5KC">
+                            <rect key="frame" x="134.5" y="214.5" width="51" height="51"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details_negative" id="44A-k2-eu1">
+                            <rect key="frame" x="134" y="209" width="53" height="62"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -52,5 +62,7 @@
     </objects>
     <resources>
         <image name="bg_details" width="320" height="296"/>
+        <image name="details_negative" width="53" height="62"/>
+        <image name="details_positive" width="51" height="51"/>
     </resources>
 </document>

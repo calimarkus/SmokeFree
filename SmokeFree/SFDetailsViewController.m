@@ -35,6 +35,8 @@
         self.bgImage.tintColor = [UIColor smokeFreeGreen];
         self.titleLabel.text = @"That's how we roll!";
         self.subTitleLabel.text = @"You reached your goal today!";
+        self.positiveImage.hidden = NO;
+        self.negativeImage.hidden = YES;
     } else {
         self.bgImage.tintColor = [UIColor smokeFreeRed];
         self.titleLabel.text = @"Come on!";
@@ -43,6 +45,8 @@
         } else {
             self.subTitleLabel.text = @"You can do better! You wanted this, no?";
         }
+        self.positiveImage.hidden = YES;
+        self.negativeImage.hidden = NO;
     }
 }
 
