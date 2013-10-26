@@ -6,6 +6,8 @@
 //
 //
 
+#import "SFProfileHeaderView.h"
+
 #import "SFProfileViewController.h"
 
 @interface SFProfileViewController ()
@@ -26,7 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    self.tableView.tableHeaderView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil] instantiateWithOwner:nil options:nil][0];
 }
 
 @end

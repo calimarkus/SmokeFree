@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D22CC269181C22EA00A61CB9 /* SFProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22CC268181C22EA00A61CB9 /* SFProfileHeaderView.xib */; };
+		D22CC26C181C23B800A61CB9 /* SFProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC26B181C23B800A61CB9 /* SFProfileHeaderView.m */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -33,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D22CC268181C22EA00A61CB9 /* SFProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFProfileHeaderView.xib; sourceTree = "<group>"; };
+		D22CC26A181C23B800A61CB9 /* SFProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFProfileHeaderView.h; sourceTree = "<group>"; };
+		D22CC26B181C23B800A61CB9 /* SFProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFProfileHeaderView.m; sourceTree = "<group>"; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -114,6 +119,9 @@
 				D29480D4181C119D00C51E87 /* SFAppDelegate.m */,
 				D29480F3181C11D500C51E87 /* SFProfileViewController.h */,
 				D29480F4181C11D500C51E87 /* SFProfileViewController.m */,
+				D22CC26A181C23B800A61CB9 /* SFProfileHeaderView.h */,
+				D22CC26B181C23B800A61CB9 /* SFProfileHeaderView.m */,
+				D22CC268181C22EA00A61CB9 /* SFProfileHeaderView.xib */,
 				D29480D6181C119D00C51E87 /* Images.xcassets */,
 				D29480CB181C119D00C51E87 /* Supporting Files */,
 			);
@@ -224,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22CC269181C22EA00A61CB9 /* SFProfileHeaderView.xib in Resources */,
 				D29480CF181C119D00C51E87 /* InfoPlist.strings in Resources */,
 				D29480D7181C119D00C51E87 /* Images.xcassets in Resources */,
 			);
@@ -246,6 +255,7 @@
 			files = (
 				D29480D1181C119D00C51E87 /* main.m in Sources */,
 				D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */,
+				D22CC26C181C23B800A61CB9 /* SFProfileHeaderView.m in Sources */,
 				D29480D5181C119D00C51E87 /* SFAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +457,7 @@
 				D29480EF181C119D00C51E87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D29480F0181C119D00C51E87 /* Build configuration list for PBXNativeTarget "SmokeFreeTests" */ = {
 			isa = XCConfigurationList;
@@ -455,6 +466,7 @@
 				D29480F2181C119D00C51E87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
