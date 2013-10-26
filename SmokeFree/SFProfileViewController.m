@@ -110,8 +110,22 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
+    // update box offset for profile view
     CGFloat overshoot = ABS(MAX(0, scrollView.contentOffset.y + 50));
     self.profileView.boxOffset= overshoot/5.0;
+
+    // fade out cells at the bottom
+    NSArray *visibleCells = [self.tableView visibleCells];
+    CGFloat fadeOutPosition = [UIScreen mainScreen].bounds.size.height - 100;
+    for (UITableViewCell *cell in visibleCells) {
+        CGFloat relativePosition = cell.centerY - scrollView.contentOffset.y;
+        if (relativePosition > fadeOutPosition) {
+            CGFloat relativeDistance = (1.0 - MIN([UIScreen mainScreen].bounds.size.height, (relativePosition - fadeOutPosition))/100.0);
+            cell.alpha = relativeDistance;
+        } else {
+            cell.alpha = 1.0;
+        }
+    }
 }
 
 #pragma mark UITableViewDelegate
