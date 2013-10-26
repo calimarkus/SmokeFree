@@ -6,11 +6,13 @@
 //
 //
 
+#import <MessageUI/MessageUI.h>
+
 #import "SFProfileHeaderView.h"
 
 #import "SFProfileViewController.h"
 
-@interface SFProfileViewController ()
+@interface SFProfileViewController () <MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) SFProfileHeaderView *profileView;
 @end
@@ -26,7 +28,7 @@
         self.data = @[@(0),@(1),@(2), @(3), @(4), @(5)];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                               target:nil action:nil];
+                                                                                               target:self action:@selector(shareButtonTouched:)];
     }
     return self;
 }
@@ -53,6 +55,31 @@
         self.profileView.boxOffset = 0.0;
     } completion:nil];
 
+}
+
+#pragma mark sharing
+
+- (void)shareButtonTouched:(UIBarButtonItem*)sender;
+{
+    if (![MFMailComposeViewController canSendMail]) return;
+
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    [mailController setToRecipients:@[@"\"Better Caul Saul\"<nosmoke@therapy.org>"]];
+    [mailController setSubject:@"Look, I really need some help…"];
+    [mailController setMessageBody:@"Here are my latest SmokeFree stats.. You better have a look at it. Sorry Saul.\n\n Cheers Mike" isHTML:NO];
+    mailController.mailComposeDelegate = self;
+    
+    NSData *someData = [[NSData alloc] init];
+    [mailController addAttachmentData:someData mimeType:@"text/json" fileName:@"stats.json"];
+    
+    [self presentViewController:mailController animated:YES completion:nil];
+}
+
+#pragma mark MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark UIRefreshControl
