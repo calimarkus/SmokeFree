@@ -11,15 +11,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask" id="A2Q-tW-OWP">
-                    <rect key="frame" x="45" y="12" width="115" height="115"/>
+                    <rect key="frame" x="45" y="25" width="115" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask" id="LzH-hq-li1">
-                    <rect key="frame" x="160" y="12" width="115" height="115"/>
+                    <rect key="frame" x="160" y="25" width="115" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask" id="yHb-Ql-mcX">
-                    <rect key="frame" x="103" y="112" width="115" height="115"/>
+                    <rect key="frame" x="103" y="125" width="115" height="115"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>

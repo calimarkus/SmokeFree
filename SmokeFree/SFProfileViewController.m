@@ -35,6 +35,7 @@
 {
     [super viewDidLoad];
     
+    // add header view
     SFProfileHeaderView *profileView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil]
                                         instantiateWithOwner:nil options:nil][0];
     
@@ -68,6 +69,11 @@
     cell.textLabel.text = [NSString stringWithFormat: @"%d", indexPath.row];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
