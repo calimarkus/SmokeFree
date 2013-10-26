@@ -19,6 +19,7 @@
 		D29480E0181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
 		D29480E8181C119D00C51E87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D29480E6181C119D00C51E87 /* InfoPlist.strings */; };
 		D29480EA181C119D00C51E87 /* SmokeFreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29480E9181C119D00C51E87 /* SmokeFreeTests.m */; };
+		D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29480F4181C11D500C51E87 /* SFProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		D29480E5181C119D00C51E87 /* SmokeFreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmokeFreeTests-Info.plist"; sourceTree = "<group>"; };
 		D29480E7181C119D00C51E87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D29480E9181C119D00C51E87 /* SmokeFreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmokeFreeTests.m; sourceTree = "<group>"; };
+		D29480F3181C11D500C51E87 /* SFProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFProfileViewController.h; sourceTree = "<group>"; };
+		D29480F4181C11D500C51E87 /* SFProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 			children = (
 				D29480D3181C119D00C51E87 /* SFAppDelegate.h */,
 				D29480D4181C119D00C51E87 /* SFAppDelegate.m */,
+				D29480F3181C11D500C51E87 /* SFProfileViewController.h */,
+				D29480F4181C11D500C51E87 /* SFProfileViewController.m */,
 				D29480D6181C119D00C51E87 /* Images.xcassets */,
 				D29480CB181C119D00C51E87 /* Supporting Files */,
 			);
@@ -240,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29480D1181C119D00C51E87 /* main.m in Sources */,
+				D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */,
 				D29480D5181C119D00C51E87 /* SFAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
