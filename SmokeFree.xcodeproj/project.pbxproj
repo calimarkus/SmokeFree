@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D22CC269181C22EA00A61CB9 /* SFProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22CC268181C22EA00A61CB9 /* SFProfileHeaderView.xib */; };
 		D22CC26C181C23B800A61CB9 /* SFProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC26B181C23B800A61CB9 /* SFProfileHeaderView.m */; };
+		D22CC26F181C277E00A61CB9 /* UIColor+SmokeFree.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC26E181C277E00A61CB9 /* UIColor+SmokeFree.m */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 		D22CC268181C22EA00A61CB9 /* SFProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFProfileHeaderView.xib; sourceTree = "<group>"; };
 		D22CC26A181C23B800A61CB9 /* SFProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFProfileHeaderView.h; sourceTree = "<group>"; };
 		D22CC26B181C23B800A61CB9 /* SFProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFProfileHeaderView.m; sourceTree = "<group>"; };
+		D22CC26D181C277E00A61CB9 /* UIColor+SmokeFree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SmokeFree.h"; sourceTree = "<group>"; };
+		D22CC26E181C277E00A61CB9 /* UIColor+SmokeFree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SmokeFree.m"; sourceTree = "<group>"; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +125,8 @@
 				D22CC26A181C23B800A61CB9 /* SFProfileHeaderView.h */,
 				D22CC26B181C23B800A61CB9 /* SFProfileHeaderView.m */,
 				D22CC268181C22EA00A61CB9 /* SFProfileHeaderView.xib */,
+				D22CC26D181C277E00A61CB9 /* UIColor+SmokeFree.h */,
+				D22CC26E181C277E00A61CB9 /* UIColor+SmokeFree.m */,
 				D29480D6181C119D00C51E87 /* Images.xcassets */,
 				D29480CB181C119D00C51E87 /* Supporting Files */,
 			);
@@ -257,6 +262,7 @@
 				D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */,
 				D22CC26C181C23B800A61CB9 /* SFProfileHeaderView.m in Sources */,
 				D29480D5181C119D00C51E87 /* SFAppDelegate.m in Sources */,
+				D22CC26F181C277E00A61CB9 /* UIColor+SmokeFree.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

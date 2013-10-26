@@ -16,6 +16,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.tintColor = [UIColor smokeFreeBlue];
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController: [[SFProfileViewController alloc] init]];
