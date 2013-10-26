@@ -27,9 +27,8 @@
     
     // animate in
     self.topView.frameBottom = 0;
-    [UIView animateWithDuration:0.4 delay:0.2 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.topView.frameY = 0;
-    } completion:nil];
+    [self willRotateToInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation
+                                  duration:0.6];
     
     // replace line chart view (so correct initalizer is used)
     [self.lineChartView removeFromSuperview];
@@ -65,6 +64,8 @@
     [self.imageView sizeToFit];
     self.imageView.center = imageCenter;
 }
+
+#pragma mark chart
 
 - (void)reloadChartData;
 {
@@ -118,6 +119,25 @@
                          [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax / 2],
                          [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax]];
     self.lineChartView.data = @[actualData, goalData];
+}
+
+#pragma mark UIViewController
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{
+    [UIView animateWithDuration:duration animations:^{
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+            self.topView.frameBottom = 70.0;
+            CGRect frame = self.view.bounds;
+            frame.origin.y = 64;
+            frame.size.height -= 64;
+            self.lineChartView.frame = frame;
+        } else {
+            self.topView.frameY = 0;
+            self.lineChartView.frame = CGRectMake(0, self.topView.frameHeight,
+                                                  self.view.frameWidth, self.view.frameHeight-self.topView.frameHeight);
+        }
+    }];
 }
 
 @end
