@@ -8,6 +8,7 @@
 
 #import <MessageUI/MessageUI.h>
 
+#import "SFDetailsViewController.h"
 #import "SFProfileHeaderView.h"
 #import "SFProfileCell.h"
 
@@ -164,6 +165,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    SFProfileCell *cell = (SFProfileCell*)[tableView cellForRowAtIndexPath:indexPath];
+    
+    SFDetailsViewController* viewController = [[SFDetailsViewController alloc] init];
+    viewController.title = cell.mainLabel.text;
+    viewController.value = [cell.accessoryLabel.text floatValue];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 

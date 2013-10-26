@@ -17,6 +17,7 @@
 		D22CC281181C479800A61CB9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22CC280181C479800A61CB9 /* MessageUI.framework */; };
 		D22CC283181C4B8000A61CB9 /* SFProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22CC282181C4B8000A61CB9 /* SFProfileCell.xib */; };
 		D22CC286181C4BA200A61CB9 /* SFProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC285181C4BA200A61CB9 /* SFProfileCell.m */; };
+		D22CC289181C66C200A61CB9 /* SFDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC288181C66C200A61CB9 /* SFDetailsViewController.m */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -60,6 +61,8 @@
 		D22CC282181C4B8000A61CB9 /* SFProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFProfileCell.xib; sourceTree = "<group>"; };
 		D22CC284181C4BA200A61CB9 /* SFProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFProfileCell.h; sourceTree = "<group>"; };
 		D22CC285181C4BA200A61CB9 /* SFProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFProfileCell.m; sourceTree = "<group>"; };
+		D22CC287181C66C200A61CB9 /* SFDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDetailsViewController.h; sourceTree = "<group>"; };
+		D22CC288181C66C200A61CB9 /* SFDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDetailsViewController.m; sourceTree = "<group>"; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,15 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		D22CC28A181C66C500A61CB9 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				D22CC287181C66C200A61CB9 /* SFDetailsViewController.h */,
+				D22CC288181C66C200A61CB9 /* SFDetailsViewController.m */,
+			);
+			name = Details;
+			sourceTree = "<group>";
+		};
 		D29480B8181C119D00C51E87 = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +185,7 @@
 				D22CC27D181C44A700A61CB9 /* SFStartViewController.h */,
 				D22CC27E181C44A700A61CB9 /* SFStartViewController.m */,
 				D22CC276181C321300A61CB9 /* Profile */,
+				D22CC28A181C66C500A61CB9 /* Details */,
 				D22CC275181C320B00A61CB9 /* Categories */,
 				D22CC270181C312A00A61CB9 /* profileImage.jpg */,
 				D29480D6181C119D00C51E87 /* Images.xcassets */,
@@ -308,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22CC289181C66C200A61CB9 /* SFDetailsViewController.m in Sources */,
 				D22CC286181C4BA200A61CB9 /* SFProfileCell.m in Sources */,
 				D22CC27F181C44A700A61CB9 /* SFStartViewController.m in Sources */,
 				D29480D1181C119D00C51E87 /* main.m in Sources */,
