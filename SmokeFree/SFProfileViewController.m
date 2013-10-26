@@ -27,9 +27,6 @@
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:nil action:nil];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menubtn"]
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:nil action:nil];
     }
     return self;
 }

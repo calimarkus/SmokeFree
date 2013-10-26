@@ -14,6 +14,8 @@
 		D22CC271181C312A00A61CB9 /* profileImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D22CC270181C312A00A61CB9 /* profileImage.jpg */; };
 		D22CC274181C31C200A61CB9 /* UIImage+MaskedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC273181C31C200A61CB9 /* UIImage+MaskedImage.m */; };
 		D22CC27C181C345000A61CB9 /* UIView+position.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC27B181C345000A61CB9 /* UIView+position.m */; };
+		D22CC27F181C44A700A61CB9 /* SFStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC27E181C44A700A61CB9 /* SFStartViewController.m */; };
+		D22CC281181C479800A61CB9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22CC280181C479800A61CB9 /* MessageUI.framework */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -51,6 +53,9 @@
 		D22CC273181C31C200A61CB9 /* UIImage+MaskedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MaskedImage.m"; sourceTree = "<group>"; };
 		D22CC27A181C345000A61CB9 /* UIView+position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+position.h"; sourceTree = "<group>"; };
 		D22CC27B181C345000A61CB9 /* UIView+position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+position.m"; sourceTree = "<group>"; };
+		D22CC27D181C44A700A61CB9 /* SFStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFStartViewController.h; sourceTree = "<group>"; };
+		D22CC27E181C44A700A61CB9 /* SFStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFStartViewController.m; sourceTree = "<group>"; };
+		D22CC280181C479800A61CB9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */,
+				D22CC281181C479800A61CB9 /* MessageUI.framework in Frameworks */,
 				D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */,
 				D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */,
 				337C0C2D25AB44C19DA11A5F /* libPods.a in Frameworks */,
@@ -145,6 +151,7 @@
 		D29480C3181C119D00C51E87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D22CC280181C479800A61CB9 /* MessageUI.framework */,
 				D29480C4181C119D00C51E87 /* Foundation.framework */,
 				D29480C6181C119D00C51E87 /* CoreGraphics.framework */,
 				D29480C8181C119D00C51E87 /* UIKit.framework */,
@@ -159,6 +166,8 @@
 			children = (
 				D29480D3181C119D00C51E87 /* SFAppDelegate.h */,
 				D29480D4181C119D00C51E87 /* SFAppDelegate.m */,
+				D22CC27D181C44A700A61CB9 /* SFStartViewController.h */,
+				D22CC27E181C44A700A61CB9 /* SFStartViewController.m */,
 				D22CC276181C321300A61CB9 /* Profile */,
 				D22CC275181C320B00A61CB9 /* Categories */,
 				D22CC270181C312A00A61CB9 /* profileImage.jpg */,
@@ -329,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22CC27F181C44A700A61CB9 /* SFStartViewController.m in Sources */,
 				D29480D1181C119D00C51E87 /* main.m in Sources */,
 				D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */,
 				D22CC274181C31C200A61CB9 /* UIImage+MaskedImage.m in Sources */,

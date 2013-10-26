@@ -6,7 +6,7 @@
 //
 //
 
-#import "SFProfileViewController.h"
+#import "SFStartViewController.h"
 
 #import "SFAppDelegate.h"
 
@@ -19,8 +19,8 @@
     self.window.tintColor = [UIColor smokeFreeBlue];
     [self.window makeKeyAndVisible];
     
-    SFProfileViewController *profileController = [[SFProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:profileController];
+    UIViewController *firstController = [[SFStartViewController alloc] init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:firstController];
     
     return YES;
 }
