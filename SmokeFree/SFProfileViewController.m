@@ -12,6 +12,7 @@
 
 @interface SFProfileViewController ()
 @property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) SFProfileHeaderView *profileView;
 @end
 
 @implementation SFProfileViewController
@@ -22,7 +23,7 @@
     if (self) {
         self.title = [@"Mike" uppercaseString];
         
-        self.data = @[@(0),@(1),@(2)];
+        self.data = @[@(0),@(1),@(2), @(3), @(4), @(5)];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:nil action:nil];
@@ -42,11 +43,11 @@
     [self.refreshControl addTarget:self action:@selector(refreshTriggered:) forControlEvents:UIControlEventValueChanged];
     
     // add header view
-    SFProfileHeaderView *profileView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil]
-                                        instantiateWithOwner:nil options:nil][0];
+    self.profileView = [[UINib nibWithNibName:@"SFProfileHeaderView" bundle:nil]
+                        instantiateWithOwner:nil options:nil][0];
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 240)];
-    [headerView addSubview:profileView];
+    [headerView addSubview:self.profileView];
     self.tableView.tableHeaderView = headerView;
 
 }
@@ -61,8 +62,21 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [refreshControl endRefreshing];
-        [self.tableView reloadData];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.data.count-1 inSection:1]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
     });
+}
+
+#pragma mark UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+{
+    CGFloat overshoot = ABS(MAX(0, scrollView.contentOffset.y + 50));
+    CGFloat offset = overshoot/8.0;
+    
+    self.profileView.profileImageView.transform = CGAffineTransformMakeTranslation(-offset, -offset);
+    self.profileView.rightBoxImageView.transform = CGAffineTransformMakeTranslation(offset, -offset);
+    self.profileView.bottomBoxImageView.transform = CGAffineTransformMakeTranslation(0, offset);
 }
 
 #pragma mark UITableViewDelegate

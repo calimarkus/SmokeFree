@@ -26,7 +26,7 @@
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="leftBoxImageView" destination="yHb-Ql-mcX" id="9Q0-xF-uvF"/>
+                <outlet property="bottomBoxImageView" destination="yHb-Ql-mcX" id="MA2-Bt-cNi"/>
                 <outlet property="profileImageView" destination="A2Q-tW-OWP" id="KHx-Kx-2wy"/>
                 <outlet property="rightBoxImageView" destination="LzH-hq-li1" id="n6e-ff-O1J"/>
             </connections>

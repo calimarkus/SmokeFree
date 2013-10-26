@@ -24,9 +24,9 @@
     self.rightBoxImageView.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.rightBoxImageView.tintColor = [UIColor smokeFreeBlue];
     
-    image = self.rightBoxImageView.image;
-    self.leftBoxImageView.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.leftBoxImageView.tintColor = [UIColor smokeFreeGreen];
+    image = self.bottomBoxImageView.image;
+    self.bottomBoxImageView.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.bottomBoxImageView.tintColor = [UIColor smokeFreeGreen];
 }
 
 @end
