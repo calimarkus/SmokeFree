@@ -95,7 +95,7 @@
 
 - (void)refreshTriggered:(UIRefreshControl*)refreshControl;
 {
-    self.data = [self.data arrayByAddingObject:@((arc4random()*1000)/1000.0)];
+    self.data = [self.data arrayByAddingObject:@((arc4random()%1000)/100.0)];
     
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
