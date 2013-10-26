@@ -72,11 +72,11 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 {
     CGFloat overshoot = ABS(MAX(0, scrollView.contentOffset.y + 50));
-    CGFloat offset = overshoot/8.0;
+    CGFloat offset = overshoot/5.0;
     
     self.profileView.profileImageView.transform = CGAffineTransformMakeTranslation(-offset, -offset);
-    self.profileView.rightBoxImageView.transform = CGAffineTransformMakeTranslation(offset, -offset);
-    self.profileView.bottomBoxImageView.transform = CGAffineTransformMakeTranslation(0, offset);
+    self.profileView.rightBox.transform = CGAffineTransformMakeTranslation(offset, -offset);
+    self.profileView.bottomBox.transform = CGAffineTransformMakeTranslation(0, offset);
 }
 
 #pragma mark UITableViewDelegate

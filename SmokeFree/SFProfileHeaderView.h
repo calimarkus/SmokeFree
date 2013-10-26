@@ -14,4 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *rightBoxImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomBoxImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *rightBox;
+@property (weak, nonatomic) IBOutlet UIView *bottomBox;
+
 @end
