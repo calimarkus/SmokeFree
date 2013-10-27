@@ -27,7 +27,7 @@
     // seutp view
     self.view.backgroundColor = [UIColor whiteColor];
     self.bgImage.image = [[UIImage imageNamed:@"bg_details"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self setDidReachTarget:(self.value < 0)];
+    [self setDidReachTarget:(self.file.value < 0)];
 
     // add share button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
@@ -46,8 +46,7 @@
     [self.view insertSubview:self.lineChartView belowSubview:self.topView];
     
     // update data
-    NSString *fullname = [self.filename stringByAppendingPathExtension:@"txt"];
-    self.fileData = [[SFFileManager sharedInstance] fileContentsOfFileNamed:fullname];
+    self.fileData = [[SFFileManager sharedInstance] fileContentsOfFileNamed:self.file.fileName];
     
     [self reloadChartData];
 }
@@ -64,7 +63,7 @@
     } else {
         self.bgImage.tintColor = [UIColor smokeFreeRed];
         self.titleLabel.text = @"Come on!";
-        if (self.value < 1.0) {
+        if (self.file.value < 1.0) {
             self.subTitleLabel.text = @"So close… tomorrow you can do it!";
             self.imageView.image = [UIImage imageNamed:@"details_neutral"];
         } else {
@@ -137,7 +136,7 @@
     actualData.xMin = 0;
     actualData.xMax = normalizedData.count;
     actualData.title = @"Smoke Amount";
-    actualData.color = (self.value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
+    actualData.color = (self.file.value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
     actualData.itemCount = normalizedData.count;
     actualData.getData = ^(NSUInteger item) {
         NSDictionary *data = normalizedData[item];

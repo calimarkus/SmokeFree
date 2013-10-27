@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class SFFile;
 @class LineChartView;
 
 @interface SFDetailsViewController : UIViewController
@@ -20,7 +21,6 @@
 
 @property (strong, nonatomic) IBOutlet LineChartView *lineChartView;
 
-@property (nonatomic, assign) CGFloat value;
-@property (nonatomic, assign) NSString *filename;
+@property (nonatomic, strong) SFFile *file;
 
 @end

@@ -74,9 +74,16 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     
-    // load file list
-    NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentRootPath error:nil];
-    return contents;
+    // load files
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentRootPath error:nil];
+    NSMutableArray *sfFiles = [NSMutableArray array];
+    for (NSString *filename in [directoryContents reverseObjectEnumerator]) {
+        SFFile *file = [[SFFile alloc] init];
+        file.fileName = filename;
+        [sfFiles addObject:file];
+    }
+    
+    return sfFiles;
 }
 
 - (NSArray*)fileContentsOfFileNamed:(NSString*)fileName;
@@ -104,6 +111,20 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 @implementation SFFile
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.value = (arc4random()%1000)/100.0-5.0; // random value between -5% to +5%
+    }
+    return self;
+}
+
+- (NSString *)formattedName;
+{
+    return [self.fileName stringByReplacingOccurrencesOfString:@".txt" withString:@""];
+}
+
 + (NSDateFormatter*)dateFormatter;
 {
     static NSDateFormatter *_dateFormatter = nil;
@@ -113,11 +134,6 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     });
     
     return _dateFormatter;
-}
-
-- (NSString *)formattedName;
-{
-    return self.fileName;
 }
 
 @end

@@ -16,8 +16,7 @@
 #import "SFProfileViewController.h"
 
 @interface SFProfileViewController () <MFMailComposeViewControllerDelegate>
-@property (nonatomic, strong) NSArray *dataNames;
-@property (nonatomic, strong) NSArray *dataValues;
+@property (nonatomic, strong) NSArray *files;
 @property (nonatomic, strong) SFProfileHeaderView *profileView;
 @end
 
@@ -131,19 +130,7 @@
 
 - (void)reloadData;
 {
-    NSArray *fileNames = [[SFFileManager sharedInstance] existingFiles];
-    NSMutableArray *names = [NSMutableArray array];
-    for (NSString *name in [fileNames reverseObjectEnumerator]) {
-        NSString *cleanName = [name stringByReplacingOccurrencesOfString:@".txt" withString:@""];
-        [names addObject:cleanName];
-    }
-    self.dataNames = names;
-    
-    NSMutableArray *dataValues = [NSMutableArray array];
-    for (NSInteger i=0; i<self.dataNames.count; i++) {
-        [dataValues addObject:@((arc4random()%1000)/100.0-5.0)];
-    }
-    self.dataValues = dataValues;
+    self.files = [[SFFileManager sharedInstance] existingFiles];
 }
 
 #pragma mark UITableViewDelegate
@@ -155,7 +142,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return (section == 0) ? 0 : self.dataNames.count;
+    return (section == 0) ? 0 : self.files.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -167,13 +154,14 @@
 {
     SFProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:[SFProfileCell reuseIdentifier]];
     
+    SFFile *file = self.files[indexPath.row];
+    
     // update percentage
-    CGFloat value = [self.dataValues[indexPath.row] floatValue];
-    cell.accessoryLabel.text = [NSString stringWithFormat: @"%.1f %%", value];
-    cell.accessoryLabel.textColor = (value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
+    cell.accessoryLabel.text = [NSString stringWithFormat: @"%.1f %%", file.value];
+    cell.accessoryLabel.textColor = (file.value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
     
     // update day label
-    cell.mainLabel.text = self.dataNames[indexPath.row];
+    cell.mainLabel.text = file.formattedName;
     
     return cell;
 }
@@ -186,8 +174,7 @@
     
     SFDetailsViewController* viewController = [[SFDetailsViewController alloc] init];
     viewController.title = cell.mainLabel.text;
-    viewController.value = [self.dataValues[indexPath.row] floatValue];
-    viewController.filename = self.dataNames[indexPath.row];
+    viewController.file = self.files[indexPath.row];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
