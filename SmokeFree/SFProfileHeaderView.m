@@ -42,7 +42,7 @@
 {    
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI*2];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: -M_PI*2];
     rotationAnimation.duration = 1.15;
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
@@ -50,7 +50,7 @@
     [self.rightBox.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     [self.bottomBox.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     
-    rotationAnimation.toValue = [NSNumber numberWithFloat: -M_PI*2];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI*2];
     [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
