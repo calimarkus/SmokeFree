@@ -8,12 +8,13 @@
 
 #import <BoxSDK/BoxSDK.h>
 #import <ios-linechart/LineChartView.h>
+#import <MessageUI/MessageUI.h>
 
 #import "SFDetailsViewController.h"
 
 static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
-@interface SFDetailsViewController ()
+@interface SFDetailsViewController () <MFMailComposeViewControllerDelegate>
 
 @end
 
@@ -27,6 +28,10 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     self.view.backgroundColor = [UIColor whiteColor];
     self.bgImage.image = [[UIImage imageNamed:@"bg_details"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self setDidReachTarget:(self.value < 0)];
+
+    // add share button
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                           target:self action:@selector(shareButtonTouched:)];
     
     // animate in
     self.topView.frameBottom = 0;
@@ -67,6 +72,31 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     
     [self.imageView sizeToFit];
     self.imageView.center = imageCenter;
+}
+
+#pragma mark sharing
+
+- (void)shareButtonTouched:(UIBarButtonItem*)sender;
+{
+    if (![MFMailComposeViewController canSendMail]) return;
+    
+    MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+    [mailController setToRecipients:@[@"\"Better Caul Saul\"<nosmoke@therapy.org>"]];
+    [mailController setSubject:@"Look, I really need some help…"];
+    [mailController setMessageBody:@"Here are my latest SmokeFree stats.. You better have a look at it. Sorry Saul.\n\n Cheers Mike" isHTML:NO];
+    mailController.mailComposeDelegate = self;
+    
+    NSData *someData = [[NSData alloc] init];
+    [mailController addAttachmentData:someData mimeType:@"text/json" fileName:@"stats.json"];
+    
+    [self presentViewController:mailController animated:YES completion:nil];
+}
+
+#pragma mark MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark chart
