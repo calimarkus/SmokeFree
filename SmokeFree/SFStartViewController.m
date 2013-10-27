@@ -23,20 +23,23 @@
     if (self) {
         self.title = @"Smoke Free";
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oAuthComplete:)
-                                                     name:BoxOAuth2OperationDidCompleteNotification object:nil];
+        // add connect UI
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                               target:self action:@selector(connectWithBoxNet:)];
         
+        // reuse auth token
         NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"BoxSDKAccessToken"];
         NSDate *tokenExpiration =  [[NSUserDefaults standardUserDefaults] objectForKey:@"BoxSDKTokenExpiration"];
-        if (token || [[NSDate date] compare:tokenExpiration] == NSOrderedAscending) {
+        if (token && [[NSDate date] compare:tokenExpiration] == NSOrderedAscending) {
             // reuse old token
             [BoxSDK sharedSDK].OAuth2Session.accessToken = token;
             [BoxSDK sharedSDK].OAuth2Session.accessTokenExpiration = tokenExpiration;
-        } else {
-            // show auth UI
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                                   target:self action:@selector(connectWithBoxNet:)];
+            self.navigationItem.rightBarButtonItem.enabled = NO;
         }
+        
+        // register for oauth completion
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oAuthComplete:)
+                                                     name:BoxOAuth2OperationDidCompleteNotification object:nil];
     }
     return self;
 }

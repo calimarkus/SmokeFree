@@ -17,16 +17,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // init BoxSDK
+    [BoxSDK sharedSDK].OAuth2Session.clientID = @"6bqddxhgyukcra68wl6v3gm63t143ng6";
+    [BoxSDK sharedSDK].OAuth2Session.clientSecret = @"mJ3Wh8itMMgkzkYayajqQNYfxC4kdfvO";
+    
+    // setup window
     self.window = [[MBFingerTipWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.tintColor = [UIColor smokeFreeBlue];
-    [self.window makeKeyAndVisible];
     
+    // set root controller
     UIViewController *firstController = [[SFStartViewController alloc] init];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:firstController];
-    
-    [BoxSDK sharedSDK].OAuth2Session.clientID = @"6bqddxhgyukcra68wl6v3gm63t143ng6";
-    [BoxSDK sharedSDK].OAuth2Session.clientSecret = @"mJ3Wh8itMMgkzkYayajqQNYfxC4kdfvO";
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
