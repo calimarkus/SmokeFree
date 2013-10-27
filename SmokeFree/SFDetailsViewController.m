@@ -195,6 +195,8 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
         NSString *time = data[@"time"];
         
         value = 1.0 - ((value-min)/(max-min));
+        if (value < 0.1) value = 0.0;
+        
         [normalizedData addObject:@{@"time":time,@"intensity":@(value)}];
     }
     min = 0.0;
