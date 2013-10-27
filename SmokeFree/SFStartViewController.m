@@ -57,9 +57,11 @@
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"start"]];
+    [self.view addSubview:bg];
+    
     UIButton *button = [[UIButton alloc] initWithFrame:self.view.bounds];
     button.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [button setTitle:@"Start" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor smokeFreeBlue] forState:UIControlStateNormal];
     [button setTitleColor:[[UIColor smokeFreeBlue] colorWithAlphaComponent:0.25] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
