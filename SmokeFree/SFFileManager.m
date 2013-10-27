@@ -100,3 +100,26 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 }
 
 @end
+
+
+@implementation SFFile
+
++ (NSDateFormatter*)dateFormatter;
+{
+    static NSDateFormatter *_dateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _dateFormatter = [[NSDateFormatter alloc] init];
+    });
+    
+    return _dateFormatter;
+}
+
+- (NSString *)formattedName;
+{
+    return self.fileName;
+}
+
+@end
+
+

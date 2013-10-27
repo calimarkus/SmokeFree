@@ -18,3 +18,13 @@
 - (NSArray*)fileContentsOfFileNamed:(NSString*)filename;
 
 @end
+
+
+@interface SFFile : NSObject
+
+@property (nonatomic, assign) CGFloat value;
+@property (nonatomic, copy) NSString *fileName;
+@property (nonatomic, readonly) NSString *formattedName;
+
+@end
+
