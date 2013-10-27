@@ -23,11 +23,20 @@
     if (self) {
         self.title = @"Smoke Free";
         
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                               target:self action:@selector(connectWithBoxNet:)];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oAuthComplete:)
                                                      name:BoxOAuth2OperationDidCompleteNotification object:nil];
+        
+        NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"BoxSDKAccessToken"];
+        NSDate *tokenExpiration =  [[NSUserDefaults standardUserDefaults] objectForKey:@"BoxSDKTokenExpiration"];
+        if (token || [[NSDate date] compare:tokenExpiration] == NSOrderedAscending) {
+            // reuse old token
+            [BoxSDK sharedSDK].OAuth2Session.accessToken = token;
+            [BoxSDK sharedSDK].OAuth2Session.accessTokenExpiration = tokenExpiration;
+        } else {
+            // show auth UI
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                                   target:self action:@selector(connectWithBoxNet:)];
+        }
     }
     return self;
 }
@@ -70,6 +79,15 @@
 - (void)oAuthComplete:(NSNotification*)notification;
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *token = [BoxSDK sharedSDK].OAuth2Session.accessToken;
+    NSDate *tokenExpiration = [BoxSDK sharedSDK].OAuth2Session.accessTokenExpiration;
+    if (token) {
+        [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"BoxSDKAccessToken"];
+        [[NSUserDefaults standardUserDefaults] setObject:tokenExpiration forKey:@"BoxSDKTokenExpiration"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 @end
