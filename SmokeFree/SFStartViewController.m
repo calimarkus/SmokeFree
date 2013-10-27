@@ -70,6 +70,13 @@
 
 - (void)start:(id)sender;
 {
+    // show auth controller, if no accessToken is available
+    if ([BoxSDK sharedSDK].OAuth2Session.accessToken == nil) {
+        [self connectWithBoxNet:self.navigationItem.rightBarButtonItem];
+        return;
+    }
+    
+    // show profile controller
     SFProfileViewController *profileController = [[SFProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:profileController animated:YES];
 }
