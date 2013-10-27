@@ -10,10 +10,11 @@
 
 @interface SFProfileHeaderView : UIView
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *leftBoxImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *rightBoxImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomBoxImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *leftBox;
 @property (weak, nonatomic) IBOutlet UIView *rightBox;
 @property (weak, nonatomic) IBOutlet UIView *bottomBox;
 

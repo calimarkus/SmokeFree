@@ -17,8 +17,8 @@
     [super awakeFromNib];
     
     UIImage *profileImage = [UIImage imageNamed:@"profileImage.jpg"];
-    UIImage *maskImage = self.profileImageView.image;
-    self.profileImageView.image = [profileImage maskedImageUsingMask:maskImage];
+    UIImage *maskImage = self.leftBoxImageView.image;
+    self.leftBoxImageView.image = [profileImage maskedImageUsingMask:maskImage];
     
     UIImage *image = self.rightBoxImageView.image;
     self.rightBoxImageView.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -33,7 +33,7 @@
 {
     _boxOffset = boxOffset;
     
-    self.profileImageView.transform = CGAffineTransformMakeTranslation(-boxOffset, -boxOffset);
+    self.leftBox.transform = CGAffineTransformMakeTranslation(-boxOffset, -boxOffset);
     self.rightBox.transform = CGAffineTransformMakeTranslation(boxOffset, -boxOffset);
     self.bottomBox.transform = CGAffineTransformMakeTranslation(0, boxOffset);
 }
