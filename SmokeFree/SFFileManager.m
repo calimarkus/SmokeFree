@@ -94,10 +94,18 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     NSData *fileData = [NSData dataWithContentsOfFile:[documentRootPath stringByAppendingPathComponent:fileName]];
     
     // remove empty data sets
-    NSDictionary *data = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
+    NSError *error;
+    NSDictionary *data = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:&error];
+    if (!data || error) {
+        NSLog(@"JSON ERROR: %@", [error localizedDescription]);
+        return nil;
+    }
+    
+    // remove invalid datasets
     NSMutableArray *cleanedDataSet = [data[[data allKeys][0]] mutableCopy];
     for (NSInteger i=0; i<cleanedDataSet.count; i++) {
-        if ([[cleanedDataSet[i] allKeys] count] != 2) {
+        if ([[cleanedDataSet[i] allKeys] count] != 2 ||
+            [cleanedDataSet[i][@"intensity"] floatValue] == 0) {
             [cleanedDataSet removeObjectAtIndex:i];
             i--;
         }
