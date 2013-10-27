@@ -16,7 +16,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 @interface SFDetailsViewController () <MFMailComposeViewControllerDelegate>
 @property (nonatomic, copy) NSString *latestFileName;
-@property (nonatomic, strong) NSDictionary *latestFileData;
+@property (nonatomic, strong) NSArray *latestFileData;
 @end
 
 @implementation SFDetailsViewController
@@ -156,8 +156,17 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
         NSData *fileData = [NSData dataWithContentsOfFile:[documentRootPath stringByAppendingPathComponent:fileName]];
         
         if (![self.latestFileName isEqualToString:fileName]) {
+            NSDictionary *data = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
+            NSMutableArray *contents = [data[[data allKeys][0]] mutableCopy];
+            for (NSInteger i=0; i<contents.count; i++) {
+                if ([[contents[i] allKeys] count] == 0) {
+                    [contents removeObjectAtIndex:i];
+                    i--;
+                }
+            }
+            
             self.latestFileName = fileName;
-            self.latestFileData = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
+            self.latestFileData = contents;
         }
     }
 }
@@ -166,56 +175,52 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 - (void)reloadChartData;
 {
+    // read min/max & values
+    CGFloat min=CGFLOAT_MAX, max=CGFLOAT_MAX;
+    for (NSDictionary *data in self.latestFileData) {
+        CGFloat value = [data[@"intensity"] floatValue];
+        
+        if (min == CGFLOAT_MAX) min = value;
+        else min = MIN(min,value);
+        
+        if (max == CGFLOAT_MAX) max = value;
+        else max = MAX(max,value);
+    }
+    
+    // normalize data
+    NSMutableArray *normalizedData = [NSMutableArray array];
+    for (NSDictionary *data in self.latestFileData) {
+        CGFloat value = [data[@"intensity"] floatValue];
+        NSString *time = data[@"time"];
+        
+        value = 1.0 - ((value-min)/(max-min));
+        [normalizedData addObject:@{@"time":time,@"intensity":@(value)}];
+    }
+    min = 0.0;
+    max = 1.0;
+    
+    // init linechart
     LineChartData *actualData = [LineChartData new];
-    actualData.xMin = 1;
-    actualData.xMax = 31;
+    actualData.xMin = 0;
+    actualData.xMax = normalizedData.count;
     actualData.title = @"Smoke Amount";
     actualData.color = (self.value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
-    actualData.itemCount = 10;
-    
-    NSMutableArray *actualValues = [NSMutableArray new];
-    for(NSUInteger i = 0; i < actualData.itemCount; ++i) {
-        [actualValues addObject:@((rand() / (float)RAND_MAX) * (31 - 1) + 1)];
-    }
-    [actualValues sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1 compare:obj2];
-    }];
+    actualData.itemCount = normalizedData.count;
     actualData.getData = ^(NSUInteger item) {
-        float x = [actualValues[item] floatValue];
-        float y = powf(2, x / 7);
-        NSString *label1 = [NSString stringWithFormat:@"%lu", (unsigned long)item];
-        NSString *label2 = [NSString stringWithFormat:@"%f", y];
-        return [LineChartDataItem dataItemWithX:x y:y xLabel:label1 dataLabel:label2];
+        NSDictionary *data = normalizedData[item];
+        float x = item;
+        float y = [data[@"intensity"] floatValue];
+        NSString *xLabel = data[@"time"];
+        NSString *yLabel = [NSString stringWithFormat:@"%f", y];
+        return [LineChartDataItem dataItemWithX:x y:y xLabel:xLabel dataLabel:yLabel];
     };
     
-    LineChartData *goalData = [LineChartData new];
-    goalData.xMin = 1;
-    goalData.xMax = 31;
-    goalData.title = @"Goal";
-    goalData.color = [UIColor colorWithWhite:0.66 alpha:1.0];
-    goalData.itemCount = 10;
-    
-    NSMutableArray *goalValues = [NSMutableArray new];
-    for(NSUInteger i = 0; i < goalData.itemCount; ++i) {
-        [goalValues addObject:@((rand() / (float)RAND_MAX) * (31 - 1) + 1)];
-    }
-    [goalValues sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1 compare:obj2];
-    }];
-    goalData.getData = ^(NSUInteger item) {
-        float x = [goalValues[item] floatValue];
-        float y = powf(2, x / 7);
-        NSString *label1 = [NSString stringWithFormat:@"%lu", (unsigned long)item];
-        NSString *label2 = [NSString stringWithFormat:@"%f", y];
-        return [LineChartDataItem dataItemWithX:x y:y xLabel:label1 dataLabel:label2];
-    };
-    
-    self.lineChartView.yMin = 0;
-    self.lineChartView.yMax = powf(2, 31 / 7) + 0.5;
-    self.lineChartView.ySteps = @[@"0.0",
-                         [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax / 2],
-                         [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax]];
-    self.lineChartView.data = @[actualData, goalData];
+    self.lineChartView.yMin = min;
+    self.lineChartView.yMax = max;
+    self.lineChartView.ySteps = @[[NSString stringWithFormat:@"%.02f", self.lineChartView.yMin],
+                                  [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax / 2],
+                                  [NSString stringWithFormat:@"%.02f", self.lineChartView.yMax]];
+    self.lineChartView.data = @[actualData];
 }
 
 #pragma mark UIViewController
