@@ -133,7 +133,7 @@
 {
     NSArray *fileNames = [[SFFileManager sharedInstance] existingFiles];
     NSMutableArray *names = [NSMutableArray array];
-    for (NSString *name in fileNames) {
+    for (NSString *name in [fileNames reverseObjectEnumerator]) {
         NSString *cleanName = [name stringByReplacingOccurrencesOfString:@".txt" withString:@""];
         [names addObject:cleanName];
     }
@@ -144,8 +144,6 @@
         [dataValues addObject:@((arc4random()%1000)/100.0-5.0)];
     }
     self.dataValues = dataValues;
-
-//    self.dataValues = @[@(-1.24),@(0.21),@(4.23), @(-2.41), @(4.21), @(-7.23)];
 }
 
 #pragma mark UITableViewDelegate
@@ -188,7 +186,8 @@
     
     SFDetailsViewController* viewController = [[SFDetailsViewController alloc] init];
     viewController.title = cell.mainLabel.text;
-    viewController.value = [cell.accessoryLabel.text floatValue];
+    viewController.value = [self.dataValues[indexPath.row] floatValue];
+    viewController.filename = self.dataNames[indexPath.row];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

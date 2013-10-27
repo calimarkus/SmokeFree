@@ -15,7 +15,7 @@
 #import "SFDetailsViewController.h"
 
 @interface SFDetailsViewController () <MFMailComposeViewControllerDelegate>
-@property (nonatomic, strong) NSArray *latestFileData;
+@property (nonatomic, strong) NSArray *fileData;
 @end
 
 @implementation SFDetailsViewController
@@ -46,9 +46,8 @@
     [self.view insertSubview:self.lineChartView belowSubview:self.topView];
     
     // update data
-    NSArray *existingFiles = [[SFFileManager sharedInstance] existingFiles];
-    self.latestFileData = [[SFFileManager sharedInstance] fileContentsOfFileNamed:
-                           [existingFiles lastObject]];
+    NSString *fullname = [self.filename stringByAppendingPathExtension:@"txt"];
+    self.fileData = [[SFFileManager sharedInstance] fileContentsOfFileNamed:fullname];
     
     [self reloadChartData];
 }
@@ -109,7 +108,7 @@
 {
     // read min/max & values
     CGFloat min=CGFLOAT_MAX, max=CGFLOAT_MAX;
-    for (NSDictionary *data in self.latestFileData) {
+    for (NSDictionary *data in self.fileData) {
         CGFloat value = [data[@"intensity"] floatValue];
         
         if (min == CGFLOAT_MAX) min = value;
@@ -121,7 +120,7 @@
     
     // normalize data
     NSMutableArray *normalizedData = [NSMutableArray array];
-    for (NSDictionary *data in self.latestFileData) {
+    for (NSDictionary *data in self.fileData) {
         CGFloat value = [data[@"intensity"] floatValue];
         NSString *time = data[@"time"];
         

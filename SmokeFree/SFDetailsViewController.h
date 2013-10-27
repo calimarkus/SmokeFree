@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet LineChartView *lineChartView;
 
 @property (nonatomic, assign) CGFloat value;
+@property (nonatomic, assign) NSString *filename;
 
 @end
