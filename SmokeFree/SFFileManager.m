@@ -130,15 +130,31 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 - (NSString *)formattedName;
 {
-    return [self.fileName stringByReplacingOccurrencesOfString:@".txt" withString:@""];
+    NSString *cleanedName = [self.fileName stringByReplacingOccurrencesOfString:@".txt" withString:@""];
+    NSDate *date = [[SFFile parsingDateFormatter] dateFromString:cleanedName];
+    return [[SFFile outputDateFormatter] stringFromDate:date];
 }
 
-+ (NSDateFormatter*)dateFormatter;
++ (NSDateFormatter*)parsingDateFormatter;
 {
     static NSDateFormatter *_dateFormatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = @"yyMMdd_HHmm"; // 131026_2200
+    });
+    
+    return _dateFormatter;
+}
+
++ (NSDateFormatter*)outputDateFormatter;
+{
+    static NSDateFormatter *_dateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.timeStyle = NSDateFormatterShortStyle;
+        _dateFormatter.dateStyle = NSDateFormatterNoStyle;
     });
     
     return _dateFormatter;
