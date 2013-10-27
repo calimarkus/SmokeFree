@@ -11,11 +11,13 @@
 #import "SFDetailsViewController.h"
 #import "SFProfileHeaderView.h"
 #import "SFProfileCell.h"
+#import "SFFileManager.h"
 
 #import "SFProfileViewController.h"
 
 @interface SFProfileViewController () <MFMailComposeViewControllerDelegate>
-@property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSArray *dataNames;
+@property (nonatomic, strong) NSArray *dataValues;
 @property (nonatomic, strong) SFProfileHeaderView *profileView;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
@@ -28,12 +30,13 @@
     if (self) {
         self.title = [@"Mike" uppercaseString];
         
-        self.data = @[@(-1.24),@(0.21),@(4.23), @(-2.41), @(4.21), @(-7.23)];
         self.dateFormatter = [[NSDateFormatter alloc] init];
         [self.dateFormatter setDateFormat:@"EEEE"];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:self action:@selector(shareButtonTouched:)];
+        
+        [self reloadData];
     }
     return self;
 }
@@ -96,14 +99,13 @@
 
 - (void)refreshTriggered:(UIRefreshControl*)refreshControl;
 {
-    self.data = [self.data arrayByAddingObject:@((arc4random()%1000)/100.0-5.0)];
+    [self reloadData];
     
-    double delayInSeconds = 0.5;
+    double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [refreshControl endRefreshing];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.data.count-1 inSection:1]]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
     });
 }
 
@@ -129,6 +131,21 @@
     }
 }
 
+#pragma mark data
+
+- (void)reloadData;
+{
+    self.dataNames = [[SFFileManager sharedInstance] existingFiles];
+    
+    NSMutableArray *dataValues = [NSMutableArray array];
+    for (NSInteger i=0; i<self.dataNames.count; i++) {
+        [dataValues addObject:@((arc4random()%1000)/100.0-5.0)];
+    }
+    self.dataValues = dataValues;
+
+//    self.dataValues = @[@(-1.24),@(0.21),@(4.23), @(-2.41), @(4.21), @(-7.23)];
+}
+
 #pragma mark UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
@@ -138,7 +155,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return (section == 0) ? 0 : self.data.count;
+    return (section == 0) ? 0 : self.dataNames.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -151,13 +168,12 @@
     SFProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:[SFProfileCell reuseIdentifier]];
     
     // update percentage
-    CGFloat value = [self.data[indexPath.row] floatValue];
+    CGFloat value = [self.dataValues[indexPath.row] floatValue];
     cell.accessoryLabel.text = [NSString stringWithFormat: @"%.1f %%", value];
     cell.accessoryLabel.textColor = (value < 0) ? [UIColor smokeFreeGreen] : [UIColor smokeFreeRed];
     
     // update day label
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:-60*60*24*(indexPath.row+1)];
-    cell.mainLabel.text = [self.dateFormatter stringFromDate:date];
+    cell.mainLabel.text = self.dataNames[indexPath.row];
     
     return cell;
 }
