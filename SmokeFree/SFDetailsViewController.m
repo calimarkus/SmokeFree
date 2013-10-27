@@ -15,7 +15,8 @@
 static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 @interface SFDetailsViewController () <MFMailComposeViewControllerDelegate>
-
+@property (nonatomic, copy) NSString *latestFileName;
+@property (nonatomic, strong) NSDictionary *latestFileData;
 @end
 
 @implementation SFDetailsViewController
@@ -46,6 +47,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     
     // update data
     [self loadBoxNetJSON];
+    [self parseLatestFile];
     [self reloadChartData];
 }
 
@@ -99,7 +101,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark chart
+#pragma mark data loading
 
 - (void)loadBoxNetJSON;
 {
@@ -139,6 +141,28 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
         NSLog(@"download error with response code: %i", response.statusCode);
     }];
 }
+
+- (void)parseLatestFile;
+{
+    // build path
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentRootPath = [documentPaths objectAtIndex:0];
+    
+    // load file list
+    NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentRootPath error:nil];
+    if (contents.count > 0) {
+        [contents sortedArrayUsingSelector:@selector(compare:)];
+        NSString *fileName = contents[contents.count-1];
+        NSData *fileData = [NSData dataWithContentsOfFile:[documentRootPath stringByAppendingPathComponent:fileName]];
+        
+        if (![self.latestFileName isEqualToString:fileName]) {
+            self.latestFileName = fileName;
+            self.latestFileData = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
+        }
+    }
+}
+
+#pragma mark chart
 
 - (void)reloadChartData;
 {
