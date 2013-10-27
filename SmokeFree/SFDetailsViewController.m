@@ -103,14 +103,15 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 - (void)loadBoxNetJSON;
 {
+    // load shared folder contents
     [[BoxSDK sharedSDK].foldersManager folderItemsWithID:SFDetailsSharedBoxFolderID requestBuilder:nil success:^(BoxCollection *collection) {
         NSMutableArray *files = [NSMutableArray array];
         for (NSUInteger i = 0; i < collection.numberOfEntries; i++) {
             [files addObject:[collection modelAtIndex:i]];
         }
         
+        // save files, if not existing already
         for (BoxModel *model in files) {
-            NSLog(@"%@, %@, %@", model.type, model.modelID, model.rawResponseJSON[@"name"]);
             [self saveFileID:model.modelID filename:model.rawResponseJSON[@"name"]];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
@@ -120,17 +121,18 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 - (void)saveFileID:(NSString *)fileID filename:(NSString *)filename
 {
+    // build path
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
     NSString *path = [documentRootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", fileID, filename]];
     
+    // check, if it exists already
     if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:nil]) {
-        NSLog(@"File existing.");
         return;
     }
     
+    // start download
     NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
-    
     [[BoxSDK sharedSDK].filesManager downloadFileWithID:fileID outputStream:outputStream requestBuilder:nil success:^(NSString *fileID, long long expectedTotalBytes) {
         NSLog(@"downloaded file - %@", fileID);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
