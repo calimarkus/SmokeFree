@@ -43,10 +43,15 @@
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI*2];
-    rotationAnimation.duration = 0.66;
+    rotationAnimation.duration = 1.15;
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
-    [sender.view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self.leftBox.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self.rightBox.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self.bottomBox.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    
+    rotationAnimation.toValue = [NSNumber numberWithFloat: -M_PI*2];
+    [self.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
 @end
