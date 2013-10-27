@@ -12,7 +12,7 @@
             <subviews>
                 <view contentMode="scaleToFill" id="VDv-3E-5vQ">
                     <rect key="frame" x="45" y="25" width="115" height="115"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mask" id="A2Q-tW-OWP">
                             <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
