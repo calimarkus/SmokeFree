@@ -132,6 +132,8 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 {
     NSString *cleanedName = [self.fileName stringByReplacingOccurrencesOfString:@".txt" withString:@""];
     NSDate *date = [[SFFile parsingDateFormatter] dateFromString:cleanedName];
+    if (!date) return cleanedName;
+    
     return [[SFFile outputDateFormatter] stringFromDate:date];
 }
 
