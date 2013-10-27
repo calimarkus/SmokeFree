@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSArray *dataNames;
 @property (nonatomic, strong) NSArray *dataValues;
 @property (nonatomic, strong) SFProfileHeaderView *profileView;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
 @implementation SFProfileViewController
@@ -29,9 +28,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = [@"Mike" uppercaseString];
-        
-        self.dateFormatter = [[NSDateFormatter alloc] init];
-        [self.dateFormatter setDateFormat:@"EEEE"];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                                target:self action:@selector(shareButtonTouched:)];
@@ -135,7 +131,13 @@
 
 - (void)reloadData;
 {
-    self.dataNames = [[SFFileManager sharedInstance] existingFiles];
+    NSArray *fileNames = [[SFFileManager sharedInstance] existingFiles];
+    NSMutableArray *names = [NSMutableArray array];
+    for (NSString *name in fileNames) {
+        NSString *cleanName = [name stringByReplacingOccurrencesOfString:@".txt" withString:@""];
+        [names addObject:cleanName];
+    }
+    self.dataNames = names;
     
     NSMutableArray *dataValues = [NSMutableArray array];
     for (NSInteger i=0; i<self.dataNames.count; i++) {

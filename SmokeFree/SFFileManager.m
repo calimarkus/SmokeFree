@@ -50,7 +50,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     // build path
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentRootPath = [documentPaths objectAtIndex:0];
-    NSString *path = [documentRootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", fileID, filename]];
+    NSString *path = [documentRootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", filename]];
     
     // check, if it exists already
     if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:nil]) {
