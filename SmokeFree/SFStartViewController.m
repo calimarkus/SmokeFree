@@ -12,7 +12,7 @@
 
 #import "SFStartViewController.h"
 
-@interface SFStartViewController ()
+@interface SFStartViewController () <BoxAuthorizationViewControllerDelegate>
 
 @end
 
@@ -78,9 +78,20 @@
 
 - (void)connectWithBoxNet:(id)sender;
 {
-    UIViewController *authorizationController = [[BoxAuthorizationViewController alloc] initWithAuthorizationURL:
-                                                 [[BoxSDK sharedSDK].OAuth2Session authorizeURL] redirectURI:nil];
-    [self presentViewController:authorizationController animated:YES completion:nil];
+    BoxAuthorizationViewController *authController = [[BoxAuthorizationViewController alloc] initWithAuthorizationURL:
+                                                      [[BoxSDK sharedSDK].OAuth2Session authorizeURL] redirectURI:nil];
+    authController.delegate = self;
+    authController.title = @"Box.net";
+    BoxFolderPickerNavigationController *navController = [[BoxFolderPickerNavigationController alloc]
+                                                          initWithRootViewController:authController];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (void)authorizationViewControllerDidStartLoading:(BoxAuthorizationViewController *)authorizationViewController; {}
+- (void)authorizationViewControllerDidFinishLoading:(BoxAuthorizationViewController *)authorizationViewController; {}
+- (void)authorizationViewControllerDidCancel:(BoxAuthorizationViewController *)authorizationViewController;
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)oAuthComplete:(NSNotification*)notification;
