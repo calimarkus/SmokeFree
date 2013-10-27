@@ -20,6 +20,10 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="wOq-B2-a6N" appends="YES" id="bN0-e3-bfM"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" id="hMi-vv-hgZ">
                     <rect key="frame" x="160" y="25" width="115" height="115"/>
@@ -45,6 +49,10 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="GHf-Kk-4ca" appends="YES" id="aJm-KC-6Lf"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" id="ewm-Cy-2u6">
                     <rect key="frame" x="103" y="125" width="115" height="115"/>
@@ -70,6 +78,10 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="fB5-f1-ctK" appends="YES" id="4xt-Fp-nEO"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -83,6 +95,21 @@
                 <outlet property="rightBoxImageView" destination="LzH-hq-li1" id="n6e-ff-O1J"/>
             </connections>
         </view>
+        <tapGestureRecognizer id="wOq-B2-a6N">
+            <connections>
+                <action selector="tapRecognized:" destination="1" id="i0f-UJ-eXn"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="GHf-Kk-4ca">
+            <connections>
+                <action selector="tapRecognized:" destination="1" id="YGm-cr-iev"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="fB5-f1-ctK">
+            <connections>
+                <action selector="tapRecognized:" destination="1" id="uQT-td-PAb"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="gridBackground" width="115" height="115"/>

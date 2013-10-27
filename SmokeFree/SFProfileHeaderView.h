@@ -20,4 +20,6 @@
 
 @property (nonatomic, assign) CGFloat boxOffset;
 
+- (IBAction)tapRecognized:(UITapGestureRecognizer *)sender;
+
 @end

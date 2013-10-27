@@ -38,4 +38,15 @@
     self.bottomBox.transform = CGAffineTransformMakeTranslation(0, boxOffset);
 }
 
+- (IBAction)tapRecognized:(UITapGestureRecognizer *)sender;
+{    
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI*2];
+    rotationAnimation.duration = 0.66;
+    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    
+    [sender.view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
+
 @end
