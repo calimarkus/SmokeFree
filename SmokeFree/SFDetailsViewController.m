@@ -43,6 +43,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     [self.lineChartView removeFromSuperview];
     self.lineChartView = [[LineChartView alloc] initWithFrame:self.lineChartView.frame];
     self.lineChartView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.lineChartView showLegend:NO animated:NO];
     [self.view insertSubview:self.lineChartView belowSubview:self.topView];
     
     // update data
@@ -138,7 +139,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     [[BoxSDK sharedSDK].filesManager downloadFileWithID:fileID outputStream:outputStream requestBuilder:nil success:^(NSString *fileID, long long expectedTotalBytes) {
         NSLog(@"downloaded file - %@", fileID);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"download error with response code: %i", response.statusCode);
+        NSLog(@"download error with response code: %li", (long)response.statusCode);
     }];
 }
 
