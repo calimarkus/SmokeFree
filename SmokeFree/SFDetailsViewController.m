@@ -86,7 +86,7 @@
     actualData.getData = ^(NSUInteger item) {
         float x = [actualValues[item] floatValue];
         float y = powf(2, x / 7);
-        NSString *label1 = [NSString stringWithFormat:@"%d", item];
+        NSString *label1 = [NSString stringWithFormat:@"%lu", (unsigned long)item];
         NSString *label2 = [NSString stringWithFormat:@"%f", y];
         return [LineChartDataItem dataItemWithX:x y:y xLabel:label1 dataLabel:label2];
     };
@@ -108,7 +108,7 @@
     goalData.getData = ^(NSUInteger item) {
         float x = [goalValues[item] floatValue];
         float y = powf(2, x / 7);
-        NSString *label1 = [NSString stringWithFormat:@"%d", item];
+        NSString *label1 = [NSString stringWithFormat:@"%lu", (unsigned long)item];
         NSString *label2 = [NSString stringWithFormat:@"%f", y];
         return [LineChartDataItem dataItemWithX:x y:y xLabel:label1 dataLabel:label2];
     };
