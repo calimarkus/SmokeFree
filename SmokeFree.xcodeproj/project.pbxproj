@@ -34,6 +34,7 @@
 		D29480E8181C119D00C51E87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D29480E6181C119D00C51E87 /* InfoPlist.strings */; };
 		D29480EA181C119D00C51E87 /* SmokeFreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29480E9181C119D00C51E87 /* SmokeFreeTests.m */; };
 		D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29480F4181C11D500C51E87 /* SFProfileViewController.m */; };
+		D2AE5F49181D9C7C00175D49 /* BoxNetCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2AE5F48181D9C7C00175D49 /* BoxNetCredentials.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		D29480E9181C119D00C51E87 /* SmokeFreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmokeFreeTests.m; sourceTree = "<group>"; };
 		D29480F3181C11D500C51E87 /* SFProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFProfileViewController.h; sourceTree = "<group>"; };
 		D29480F4181C11D500C51E87 /* SFProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFProfileViewController.m; sourceTree = "<group>"; };
+		D2AE5F48181D9C7C00175D49 /* BoxNetCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BoxNetCredentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 		D29480CB181C119D00C51E87 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D2AE5F48181D9C7C00175D49 /* BoxNetCredentials.plist */,
 				D29480CC181C119D00C51E87 /* SmokeFree-Info.plist */,
 				D29480CD181C119D00C51E87 /* InfoPlist.strings */,
 				D29480D0181C119D00C51E87 /* main.m */,
@@ -323,6 +326,7 @@
 				D22CC269181C22EA00A61CB9 /* SFProfileHeaderView.xib in Resources */,
 				D22CC283181C4B8000A61CB9 /* SFProfileCell.xib in Resources */,
 				D29480CF181C119D00C51E87 /* InfoPlist.strings in Resources */,
+				D2AE5F49181D9C7C00175D49 /* BoxNetCredentials.plist in Resources */,
 				D29480D7181C119D00C51E87 /* Images.xcassets in Resources */,
 				D22CC28C181C696400A61CB9 /* SFDetailsViewController.xib in Resources */,
 				D22CC271181C312A00A61CB9 /* profileImage.jpg in Resources */,

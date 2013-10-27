@@ -18,8 +18,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // init BoxSDK
-    [BoxSDK sharedSDK].OAuth2Session.clientID = @"6bqddxhgyukcra68wl6v3gm63t143ng6";
-    [BoxSDK sharedSDK].OAuth2Session.clientSecret = @"mJ3Wh8itMMgkzkYayajqQNYfxC4kdfvO";
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"BoxNetCredentials" ofType:@"plist"];
+    NSDictionary *credentials = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    [BoxSDK sharedSDK].OAuth2Session.clientID = credentials[@"clientID"];
+    [BoxSDK sharedSDK].OAuth2Session.clientSecret = credentials[@"clientSecret"];
+    NSAssert(credentials != nil, @"Please setup the BoxNetCredentials.plist first.");
     
     // setup window
     self.window = [[MBFingerTipWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
