@@ -12,7 +12,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)loadBoxNetContents;
+- (void)loadBoxNetContentsWithCompletion:(void(^)())completion;
 
 - (NSArray*)existingFiles;
 - (NSArray*)fileContentsOfFileNamed:(NSString*)filename;

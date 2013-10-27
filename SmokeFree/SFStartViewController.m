@@ -119,7 +119,7 @@
 - (void)didReceiveAuthToken;
 {
     // start file download
-    [[SFFileManager sharedInstance] loadBoxNetContents];
+    [[SFFileManager sharedInstance] loadBoxNetContentsWithCompletion:nil];
 }
 
 @end

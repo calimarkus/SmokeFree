@@ -27,7 +27,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 #pragma mark data loading
 
-- (void)loadBoxNetContents;
+- (void)loadBoxNetContentsWithCompletion:(void(^)())completion;
 {
     // load shared folder contents
     [[BoxSDK sharedSDK].foldersManager folderItemsWithID:SFDetailsSharedBoxFolderID requestBuilder:nil success:^(BoxCollection *collection) {
@@ -37,8 +37,18 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
         }
         
         // save files, if not existing already
+        __block NSInteger openDownloads = files.count;
         for (BoxModel *model in files) {
-            [self saveFileID:model.modelID filename:model.rawResponseJSON[@"name"]];
+            [self saveFileID:model.modelID
+                    filename:model.rawResponseJSON[@"name"]
+                    completion:^{
+                        openDownloads--;
+                        if (openDownloads <= 0 && completion) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                completion();
+                            });
+                        }
+                    }];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
         NSLog(@"folder items error: %@", error);
@@ -46,6 +56,7 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 }
 
 - (void)saveFileID:(NSString *)fileID filename:(NSString *)filename
+        completion:(void(^)())completion;
 {
     // build path
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -54,6 +65,9 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     
     // check, if it exists already
     if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:nil]) {
+        if (completion) {
+            completion();
+        }
         return;
     }
     
@@ -61,8 +75,14 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
     [[BoxSDK sharedSDK].filesManager downloadFileWithID:fileID outputStream:outputStream requestBuilder:nil success:^(NSString *fileID, long long expectedTotalBytes) {
         NSLog(@"downloaded file - %@", fileID);
+        if (completion) {
+            completion();
+        }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"download error with response code: %li", (long)response.statusCode);
+        if (completion) {
+            completion();
+        }
     }];
 }
 
