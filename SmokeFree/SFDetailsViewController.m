@@ -10,12 +10,11 @@
 #import <ios-linechart/LineChartView.h>
 #import <MessageUI/MessageUI.h>
 
+#import "SFFileManager.h"
+
 #import "SFDetailsViewController.h"
 
-static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
-
 @interface SFDetailsViewController () <MFMailComposeViewControllerDelegate>
-@property (nonatomic, copy) NSString *latestFileName;
 @property (nonatomic, strong) NSArray *latestFileData;
 @end
 
@@ -47,8 +46,10 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
     [self.view insertSubview:self.lineChartView belowSubview:self.topView];
     
     // update data
-    [self loadBoxNetJSON];
-    [self parseLatestFile];
+    NSArray *existingFiles = [[SFFileManager sharedInstance] existingFiles];
+    self.latestFileData = [[SFFileManager sharedInstance] fileContentsOfFileNamed:
+                           [existingFiles lastObject]];
+    
     [self reloadChartData];
 }
 
@@ -100,76 +101,6 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
 {
     [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark data loading
-
-- (void)loadBoxNetJSON;
-{
-    // load shared folder contents
-    [[BoxSDK sharedSDK].foldersManager folderItemsWithID:SFDetailsSharedBoxFolderID requestBuilder:nil success:^(BoxCollection *collection) {
-        NSMutableArray *files = [NSMutableArray array];
-        for (NSUInteger i = 0; i < collection.numberOfEntries; i++) {
-            [files addObject:[collection modelAtIndex:i]];
-        }
-        
-        // save files, if not existing already
-        for (BoxModel *model in files) {
-            [self saveFileID:model.modelID filename:model.rawResponseJSON[@"name"]];
-        }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
-        NSLog(@"folder items error: %@", error);
-    }];
-}
-
-- (void)saveFileID:(NSString *)fileID filename:(NSString *)filename
-{
-    // build path
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentRootPath = [documentPaths objectAtIndex:0];
-    NSString *path = [documentRootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", fileID, filename]];
-    
-    // check, if it exists already
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:nil]) {
-        return;
-    }
-    
-    // start download
-    NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
-    [[BoxSDK sharedSDK].filesManager downloadFileWithID:fileID outputStream:outputStream requestBuilder:nil success:^(NSString *fileID, long long expectedTotalBytes) {
-        NSLog(@"downloaded file - %@", fileID);
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"download error with response code: %li", (long)response.statusCode);
-    }];
-}
-
-- (void)parseLatestFile;
-{
-    // build path
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentRootPath = [documentPaths objectAtIndex:0];
-    
-    // load file list
-    NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentRootPath error:nil];
-    if (contents.count > 0) {
-        [contents sortedArrayUsingSelector:@selector(compare:)];
-        NSString *fileName = contents[contents.count-1];
-        NSData *fileData = [NSData dataWithContentsOfFile:[documentRootPath stringByAppendingPathComponent:fileName]];
-        
-        if (![self.latestFileName isEqualToString:fileName]) {
-            NSDictionary *data = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
-            NSMutableArray *contents = [data[[data allKeys][0]] mutableCopy];
-            for (NSInteger i=0; i<contents.count; i++) {
-                if ([[contents[i] allKeys] count] == 0) {
-                    [contents removeObjectAtIndex:i];
-                    i--;
-                }
-            }
-            
-            self.latestFileName = fileName;
-            self.latestFileData = contents;
-        }
-    }
 }
 
 #pragma mark chart

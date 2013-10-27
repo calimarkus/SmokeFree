@@ -7,6 +7,7 @@
 //
 
 #import <BoxSDK/BoxSDK.h>
+#import "SFFileManager.h"
 #import "SFProfileViewController.h"
 
 #import "SFStartViewController.h"
@@ -35,6 +36,7 @@
             [BoxSDK sharedSDK].OAuth2Session.accessToken = token;
             [BoxSDK sharedSDK].OAuth2Session.accessTokenExpiration = tokenExpiration;
             self.navigationItem.rightBarButtonItem.enabled = NO;
+            [self didReceiveAuthToken];
         }
         
         // register for oauth completion
@@ -90,7 +92,14 @@
         [[NSUserDefaults standardUserDefaults] setObject:tokenExpiration forKey:@"BoxSDKTokenExpiration"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         self.navigationItem.rightBarButtonItem = nil;
+        [self didReceiveAuthToken];
     }
+}
+
+- (void)didReceiveAuthToken;
+{
+    // start file download
+    [[SFFileManager sharedInstance] loadBoxNetContents];
 }
 
 @end

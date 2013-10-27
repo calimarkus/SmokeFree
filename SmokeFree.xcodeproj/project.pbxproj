@@ -20,6 +20,7 @@
 		D22CC286181C4BA200A61CB9 /* SFProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC285181C4BA200A61CB9 /* SFProfileCell.m */; };
 		D22CC289181C66C200A61CB9 /* SFDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC288181C66C200A61CB9 /* SFDetailsViewController.m */; };
 		D22CC28C181C696400A61CB9 /* SFDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22CC28B181C696400A61CB9 /* SFDetailsViewController.xib */; };
+		D25B4372181D0B97006D034E /* SFFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B4371181D0B97006D034E /* SFFileManager.m */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -67,6 +68,8 @@
 		D22CC287181C66C200A61CB9 /* SFDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDetailsViewController.h; sourceTree = "<group>"; };
 		D22CC288181C66C200A61CB9 /* SFDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDetailsViewController.m; sourceTree = "<group>"; };
 		D22CC28B181C696400A61CB9 /* SFDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFDetailsViewController.xib; sourceTree = "<group>"; };
+		D25B4370181D0B97006D034E /* SFFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFFileManager.h; sourceTree = "<group>"; };
+		D25B4371181D0B97006D034E /* SFFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFFileManager.m; sourceTree = "<group>"; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -151,6 +154,15 @@
 			name = Details;
 			sourceTree = "<group>";
 		};
+		D25B4373181D0BA1006D034E /* File Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D25B4370181D0B97006D034E /* SFFileManager.h */,
+				D25B4371181D0B97006D034E /* SFFileManager.m */,
+			);
+			name = "File Manager";
+			sourceTree = "<group>";
+		};
 		D29480B8181C119D00C51E87 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +205,7 @@
 				D22CC27E181C44A700A61CB9 /* SFStartViewController.m */,
 				D22CC276181C321300A61CB9 /* Profile */,
 				D22CC28A181C66C500A61CB9 /* Details */,
+				D25B4373181D0BA1006D034E /* File Manager */,
 				D22CC275181C320B00A61CB9 /* Categories */,
 				D22CC270181C312A00A61CB9 /* profileImage.jpg */,
 				D29480D6181C119D00C51E87 /* Images.xcassets */,
@@ -374,6 +387,7 @@
 				D22CC27C181C345000A61CB9 /* UIView+position.m in Sources */,
 				D29480D5181C119D00C51E87 /* SFAppDelegate.m in Sources */,
 				D22CC26F181C277E00A61CB9 /* UIColor+SmokeFree.m in Sources */,
+				D25B4372181D0B97006D034E /* SFFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
