@@ -22,7 +22,7 @@
     NSDictionary *credentials = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     [BoxSDK sharedSDK].OAuth2Session.clientID = credentials[@"clientID"];
     [BoxSDK sharedSDK].OAuth2Session.clientSecret = credentials[@"clientSecret"];
-    NSAssert(credentials != nil, @"Please setup the BoxNetCredentials.plist first.");
+    NSAssert(credentials != nil, @"Please setup the BoxNetCredentials.plist first. (Or remove the file from the project for a demo)");
     
     // setup window
     self.window = [[MBFingerTipWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

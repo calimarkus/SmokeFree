@@ -21,6 +21,12 @@
 		D22CC289181C66C200A61CB9 /* SFDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22CC288181C66C200A61CB9 /* SFDetailsViewController.m */; };
 		D22CC28C181C696400A61CB9 /* SFDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22CC28B181C696400A61CB9 /* SFDetailsViewController.xib */; };
 		D25B4372181D0B97006D034E /* SFFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B4371181D0B97006D034E /* SFFileManager.m */; };
+		D25B437B181E9079006D034E /* 131027_0325.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4375181E9078006D034E /* 131027_0325.txt */; };
+		D25B437C181E9079006D034E /* 131027_0844.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4376181E9078006D034E /* 131027_0844.txt */; };
+		D25B437D181E9079006D034E /* 131027_0845.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4377181E9078006D034E /* 131027_0845.txt */; };
+		D25B437E181E9079006D034E /* 131027_0846.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4378181E9079006D034E /* 131027_0846.txt */; };
+		D25B437F181E9079006D034E /* 131027_1102.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4379181E9079006D034E /* 131027_1102.txt */; };
+		D25B4380181E9079006D034E /* 131027_1103.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B437A181E9079006D034E /* 131027_1103.txt */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -71,6 +77,12 @@
 		D22CC28B181C696400A61CB9 /* SFDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SFDetailsViewController.xib; sourceTree = "<group>"; };
 		D25B4370181D0B97006D034E /* SFFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFFileManager.h; sourceTree = "<group>"; };
 		D25B4371181D0B97006D034E /* SFFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFFileManager.m; sourceTree = "<group>"; };
+		D25B4375181E9078006D034E /* 131027_0325.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_0325.txt; sourceTree = "<group>"; };
+		D25B4376181E9078006D034E /* 131027_0844.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_0844.txt; sourceTree = "<group>"; };
+		D25B4377181E9078006D034E /* 131027_0845.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_0845.txt; sourceTree = "<group>"; };
+		D25B4378181E9079006D034E /* 131027_0846.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_0846.txt; sourceTree = "<group>"; };
+		D25B4379181E9079006D034E /* 131027_1102.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_1102.txt; sourceTree = "<group>"; };
+		D25B437A181E9079006D034E /* 131027_1103.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_1103.txt; sourceTree = "<group>"; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +177,19 @@
 			name = "File Manager";
 			sourceTree = "<group>";
 		};
+		D25B4374181E9078006D034E /* ExampleData */ = {
+			isa = PBXGroup;
+			children = (
+				D25B4375181E9078006D034E /* 131027_0325.txt */,
+				D25B4376181E9078006D034E /* 131027_0844.txt */,
+				D25B4377181E9078006D034E /* 131027_0845.txt */,
+				D25B4378181E9079006D034E /* 131027_0846.txt */,
+				D25B4379181E9079006D034E /* 131027_1102.txt */,
+				D25B437A181E9079006D034E /* 131027_1103.txt */,
+			);
+			path = ExampleData;
+			sourceTree = SOURCE_ROOT;
+		};
 		D29480B8181C119D00C51E87 = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +234,7 @@
 				D22CC28A181C66C500A61CB9 /* Details */,
 				D25B4373181D0BA1006D034E /* File Manager */,
 				D22CC275181C320B00A61CB9 /* Categories */,
+				D25B4374181E9078006D034E /* ExampleData */,
 				D22CC270181C312A00A61CB9 /* profileImage.jpg */,
 				D29480D6181C119D00C51E87 /* Images.xcassets */,
 				D29480CB181C119D00C51E87 /* Supporting Files */,
@@ -323,8 +349,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25B437E181E9079006D034E /* 131027_0846.txt in Resources */,
 				D22CC269181C22EA00A61CB9 /* SFProfileHeaderView.xib in Resources */,
+				D25B437F181E9079006D034E /* 131027_1102.txt in Resources */,
 				D22CC283181C4B8000A61CB9 /* SFProfileCell.xib in Resources */,
+				D25B437C181E9079006D034E /* 131027_0844.txt in Resources */,
+				D25B437D181E9079006D034E /* 131027_0845.txt in Resources */,
+				D25B437B181E9079006D034E /* 131027_0325.txt in Resources */,
+				D25B4380181E9079006D034E /* 131027_1103.txt in Resources */,
 				D29480CF181C119D00C51E87 /* InfoPlist.strings in Resources */,
 				D2AE5F49181D9C7C00175D49 /* BoxNetCredentials.plist in Resources */,
 				D29480D7181C119D00C51E87 /* Images.xcassets in Resources */,

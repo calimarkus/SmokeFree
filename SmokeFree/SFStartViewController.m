@@ -70,10 +70,18 @@
 
 - (void)start:(id)sender;
 {
-    // show auth controller, if no accessToken is available
+    // copy demo data, if no access token is available
     if ([BoxSDK sharedSDK].OAuth2Session.accessToken == nil) {
-        [self connectWithBoxNet:self.navigationItem.rightBarButtonItem];
-        return;
+        NSArray *demofiles = @[@"131027_0325", @"131027_0844", @"131027_0845", @"131027_1102", @"131027_1103"];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        for (NSString *filename in demofiles) {
+            NSString *sourecPath = [[NSBundle mainBundle] pathForResource:filename ofType:@"txt"];
+            NSString *targetPath = [[documentsDirectory stringByAppendingPathComponent:filename]
+                                    stringByAppendingPathExtension:@"txt"];
+            [[NSFileManager defaultManager] copyItemAtPath:sourecPath toPath:targetPath error:nil];
+        }
     }
     
     // show profile controller
