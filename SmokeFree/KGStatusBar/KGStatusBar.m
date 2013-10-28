@@ -1,54 +1,107 @@
 //
-//  KGStatusBar.m
+//  JDStatusBarLabel.m
 //
-//  Created by Kevin Gibbon on 2/27/13.
-//  Copyright 2013 Kevin Gibbon. All rights reserved.
-//  @kevingibbon
+//  Based on KGStatusBar by Kevin Gibbon
+//
+//  Created by Markus Emrich on 10/28/13.
+//  Copyright 2013 Markus Emrich. All rights reserved.
 //
 
 #import "KGStatusBar.h"
 
 @interface KGStatusBar ()
-    @property (nonatomic, strong, readonly) UIWindow *overlayWindow;
-    @property (nonatomic, strong, readonly) UIView *topBar;
-    @property (nonatomic, strong) UILabel *stringLabel;
+@property (nonatomic, strong, readonly) UIWindow *overlayWindow;
+@property (nonatomic, strong, readonly) UIView *topBar;
+@property (nonatomic, strong, readonly) UILabel *stringLabel;
+
+@property (nonatomic, strong) UIColor *defaultBarColor;
+@property (nonatomic, strong) UIColor *defaultTextColor;
+@property (nonatomic, strong) UIFont *defaultFont;
 @end
 
 @implementation KGStatusBar
 
-@synthesize topBar, overlayWindow, stringLabel;
+@synthesize overlayWindow = _overlayWindow;
+@synthesize stringLabel = _stringLabel;
+@synthesize topBar = _topBar;
+
+#pragma mark class methods
 
 + (KGStatusBar*)sharedView {
     static dispatch_once_t once;
     static KGStatusBar *sharedView;
-    dispatch_once(&once, ^ { sharedView = [[KGStatusBar alloc] initWithFrame:[[UIScreen mainScreen] bounds]]; });
+    dispatch_once(&once, ^ {
+        sharedView = [[KGStatusBar alloc] initWithFrame:
+                      [[UIScreen mainScreen] bounds]];
+        
+        // set defaults
+        sharedView.defaultBarColor = [UIColor whiteColor];
+        sharedView.defaultTextColor = [UIColor grayColor];
+        sharedView.defaultFont = [UIFont systemFontOfSize:12.0];
+    });
     return sharedView;
 }
 
-+ (void)showSuccessWithStatus:(NSString*)status
++ (void)showWithStatus:(NSString *)status
+          dismissAfter:(NSTimeInterval)timeInterval;
 {
-    [KGStatusBar showWithStatus:status];
-    [KGStatusBar performSelector:@selector(dismiss) withObject:self afterDelay:2.0 ];
+    [self showWithStatus:status];
+    [self dismissAfter:timeInterval];
 }
 
-+ (void)showWithStatus:(NSString*)status {
++ (void)showWithStatus:(NSString *)status;
+{
+    [self showWithStatus:status
+                barColor:[[self sharedView] defaultBarColor]
+               textColor:[[self sharedView] defaultTextColor]
+                    font:[[self sharedView] defaultFont]];
+}
+
++ (void)showWithStatus:(NSString *)status
+              barColor:(UIColor*)barColor;
+{
+    [self showWithStatus:status
+                barColor:barColor
+               textColor:[[self sharedView] defaultTextColor]
+                    font:[[self sharedView] defaultFont]];
+}
+
++ (void)showWithStatus:(NSString *)status
+              barColor:(UIColor*)barColor
+             textColor:(UIColor*)textColor;
+{
+    [self showWithStatus:status
+                barColor:barColor
+               textColor:textColor
+                    font:[[self sharedView] defaultFont]];
+}
+
++ (void)showWithStatus:(NSString *)status
+              barColor:(UIColor*)barColor
+             textColor:(UIColor*)textColor
+                  font:(UIFont*)font;
+{
     [[KGStatusBar sharedView] showWithStatus:status
-                                    barColor:[UIColor colorWithRed:0.97f green:0.97f blue:0.97f alpha:1.00f]
-                                   textColor:[UIColor colorWithWhite:0.5 alpha:1.0]];
+                                    barColor:barColor
+                                   textColor:textColor
+                                        font:font];
 }
 
-+ (void)showErrorWithStatus:(NSString*)status {
-    [[KGStatusBar sharedView] showWithStatus:status
-                                    barColor:[UIColor colorWithRed:97.0/255.0 green:4.0/255.0 blue:4.0/255.0 alpha:1.0]
-                                   textColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]];
-    [KGStatusBar performSelector:@selector(dismiss) withObject:self afterDelay:2.0 ];
-}
-
-+ (void)dismiss {
++ (void)dismiss;
+{
     [[KGStatusBar sharedView] dismiss];
 }
 
-- (id)initWithFrame:(CGRect)frame {
++ (void)dismissAfter:(NSTimeInterval)delay;
+{
+    [[KGStatusBar sharedView] dismiss];
+    [KGStatusBar performSelector:@selector(dismiss) withObject:self afterDelay:delay];
+}
+
+#pragma mark implementation
+
+- (id)initWithFrame:(CGRect)frame;
+{
 	
     if ((self = [super initWithFrame:frame])) {
 		self.userInteractionEnabled = NO;
@@ -59,19 +112,21 @@
     return self;
 }
 
-- (void)showWithStatus:(NSString *)status barColor:(UIColor*)barColor textColor:(UIColor*)textColor{
-    if(!self.superview)
-        [self.overlayWindow addSubview:self];
+- (void)showWithStatus:(NSString *)status
+              barColor:(UIColor*)barColor
+             textColor:(UIColor*)textColor
+                  font:(UIFont*)font;
+{
+    [self.overlayWindow addSubview:self];
     [self.overlayWindow setHidden:NO];
     [self.topBar setHidden:NO];
     self.topBar.backgroundColor = barColor;
-    NSString *labelText = status;
-    CGRect labelRect = CGRectInset(CGRectOffset(self.topBar.bounds, 0, 3.0), 0, 3.0);
-    self.stringLabel.frame = labelRect;
+    self.stringLabel.frame = CGRectMake(0, 2, self.topBar.bounds.size.width, self.topBar.bounds.size.height-2);
     self.stringLabel.alpha = 0.0;
     self.stringLabel.hidden = NO;
-    self.stringLabel.text = labelText;
+    self.stringLabel.text = status;
     self.stringLabel.textColor = textColor;
+    self.stringLabel.font = font;
     [UIView animateWithDuration:0.4 animations:^{
         self.topBar.alpha = 1.0;
         self.stringLabel.alpha = 1.0;
@@ -85,49 +140,52 @@
         self.stringLabel.alpha = 0.0;
         self.topBar.alpha = 0.0;
     } completion:^(BOOL finished) {
-        [topBar removeFromSuperview];
-        topBar = nil;
+        [self.topBar removeFromSuperview];
+        _topBar = nil;
         
-        [overlayWindow removeFromSuperview];
-        overlayWindow = nil;
+        [self.overlayWindow removeFromSuperview];
+        _overlayWindow = nil;
     }];
 }
 
-- (UIWindow *)overlayWindow {
-    if(!overlayWindow) {
-        overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        overlayWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        overlayWindow.backgroundColor = [UIColor clearColor];
-        overlayWindow.userInteractionEnabled = NO;
-        overlayWindow.windowLevel = UIWindowLevelStatusBar;
+#pragma mark lazy views
+
+- (UIWindow *)overlayWindow;
+{
+    if(!_overlayWindow) {
+        _overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _overlayWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _overlayWindow.backgroundColor = [UIColor clearColor];
+        _overlayWindow.userInteractionEnabled = NO;
+        _overlayWindow.windowLevel = UIWindowLevelStatusBar;
     }
-    return overlayWindow;
+    return _overlayWindow;
 }
 
-- (UIView *)topBar {
-    if(!topBar) {
-        topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, overlayWindow.frame.size.width, 20.0)];
-        topBar.alpha = 0.0;
-        [overlayWindow addSubview:topBar];
+- (UIView *)topBar;
+{
+    if(!_topBar) {
+        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.overlayWindow.frame.size.width, 20.0)];
+        _topBar.alpha = 0.0;
+        [self.overlayWindow addSubview:_topBar];
     }
-    return topBar;
+    return _topBar;
 }
 
-- (UILabel *)stringLabel {
-    if (stringLabel == nil) {
-        stringLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-		stringLabel.textColor = [UIColor whiteColor];
-		stringLabel.backgroundColor = [UIColor clearColor];
-		stringLabel.adjustsFontSizeToFitWidth = YES;
-        stringLabel.textAlignment = NSTextAlignmentCenter;
-		stringLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-		stringLabel.font = [UIFont systemFontOfSize:12.0];
+- (UILabel *)stringLabel;
+{
+    if (_stringLabel == nil) {
+        _stringLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+		_stringLabel.backgroundColor = [UIColor clearColor];
+		_stringLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+        _stringLabel.textAlignment = NSTextAlignmentCenter;
+		_stringLabel.adjustsFontSizeToFitWidth = YES;
     }
     
-    if(!stringLabel.superview)
-        [self.topBar addSubview:stringLabel];
+    if(!_stringLabel.superview)
+        [self.topBar addSubview:_stringLabel];
     
-    return stringLabel;
+    return _stringLabel;
 }
 
 @end
