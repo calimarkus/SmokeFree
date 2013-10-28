@@ -7,9 +7,9 @@
 //  Copyright 2013 Markus Emrich. All rights reserved.
 //
 
-#import "KGStatusBar.h"
+#import "JDStatusBarLabel.h"
 
-@interface KGStatusBar ()
+@interface JDStatusBarLabel ()
 @property (nonatomic, strong, readonly) UIWindow *overlayWindow;
 @property (nonatomic, strong, readonly) UIView *topBar;
 @property (nonatomic, strong, readonly) UILabel *stringLabel;
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UIFont *defaultFont;
 @end
 
-@implementation KGStatusBar
+@implementation JDStatusBarLabel
 
 @synthesize overlayWindow = _overlayWindow;
 @synthesize stringLabel = _stringLabel;
@@ -27,11 +27,11 @@
 
 #pragma mark class methods
 
-+ (KGStatusBar*)sharedView {
++ (JDStatusBarLabel*)sharedView {
     static dispatch_once_t once;
-    static KGStatusBar *sharedView;
+    static JDStatusBarLabel *sharedView;
     dispatch_once(&once, ^ {
-        sharedView = [[KGStatusBar alloc] initWithFrame:
+        sharedView = [[JDStatusBarLabel alloc] initWithFrame:
                       [[UIScreen mainScreen] bounds]];
         
         // set defaults
@@ -81,7 +81,7 @@
              textColor:(UIColor*)textColor
                   font:(UIFont*)font;
 {
-    [[KGStatusBar sharedView] showWithStatus:status
+    [[JDStatusBarLabel sharedView] showWithStatus:status
                                     barColor:barColor
                                    textColor:textColor
                                         font:font];
@@ -89,13 +89,13 @@
 
 + (void)dismiss;
 {
-    [[KGStatusBar sharedView] dismiss];
+    [[JDStatusBarLabel sharedView] dismiss];
 }
 
 + (void)dismissAfter:(NSTimeInterval)delay;
 {
-    [[KGStatusBar sharedView] dismiss];
-    [KGStatusBar performSelector:@selector(dismiss) withObject:self afterDelay:delay];
+    [[JDStatusBarLabel sharedView] dismiss];
+    [JDStatusBarLabel performSelector:@selector(dismiss) withObject:self afterDelay:delay];
 }
 
 #pragma mark implementation

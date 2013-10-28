@@ -126,17 +126,17 @@
 
 - (void)didReceiveAuthToken;
 {
-    [KGStatusBar showWithStatus:@"Logged in to Box.net"];
+    [JDStatusBarLabel showWithStatus:@"Logged in to Box.net"];
     
     // start file download
     [[SFFileManager sharedInstance] loadBoxNetContentsWithProgress:^(NSString *filename) {
-        [KGStatusBar showWithStatus:[NSString stringWithFormat:@"Received file: %@", filename]];
+        [JDStatusBarLabel showWithStatus:[NSString stringWithFormat:@"Received file: %@", filename]];
     } completion:^{
-        [KGStatusBar showWithStatus:@"Finished downloading files"];
+        [JDStatusBarLabel showWithStatus:@"Finished downloading files"];
         double delayInSeconds = 1.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [KGStatusBar dismiss];
+            [JDStatusBarLabel dismiss];
         });
     }];
 }

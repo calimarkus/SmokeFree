@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KGStatusBar : UIView
+@interface JDStatusBarLabel : UIView
 
 + (void)showWithStatus:(NSString *)status;
 
