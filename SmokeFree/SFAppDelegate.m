@@ -29,6 +29,13 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.tintColor = [UIColor smokeFreeBlue];
     
+    // setup status bar notifications style
+    [JDStatusBarNotification setDefaultStyle:^JDStatusBarStyle*(JDStatusBarStyle *style) {
+        style.barColor = [UIColor smokeFreeBlue];
+        style.textColor = [UIColor whiteColor];
+        return style;
+    }];
+    
     // set root controller
     UIViewController *firstController = [[SFStartViewController alloc] init];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:firstController];

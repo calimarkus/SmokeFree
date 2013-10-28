@@ -42,13 +42,6 @@
         // register for oauth completion
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oAuthComplete:)
                                                      name:BoxOAuth2OperationDidCompleteNotification object:nil];
-        
-        // setup status notifications style
-        [JDStatusBarNotification setDefaultStyle:^JDStatusBarStyle*(JDStatusBarStyle *style) {
-            style.barColor = [UIColor smokeFreeBlue];
-            style.textColor = [UIColor whiteColor];
-            return style;
-        }];
     }
     return self;
 }

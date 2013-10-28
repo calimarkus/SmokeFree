@@ -9,6 +9,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    JDStatusBarAnimationTypeMove,
+    JDStatusBarAnimationTypeFade
+} JDStatusBarAnimationType;
+
 @class JDStatusBarStyle;
 typedef JDStatusBarStyle*(^JDPrepareStyleBlock)(JDStatusBarStyle *style);
 
@@ -37,6 +42,7 @@ typedef JDStatusBarStyle*(^JDPrepareStyleBlock)(JDStatusBarStyle *style);
 @property (nonatomic, strong) UIColor *barColor;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIFont *font;
+@property (nonatomic, assign) JDStatusBarAnimationType animationType;
 @end
 
 

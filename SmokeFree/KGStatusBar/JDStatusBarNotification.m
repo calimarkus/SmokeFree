@@ -38,6 +38,7 @@
         defaultStyle.barColor = [UIColor whiteColor];
         defaultStyle.textColor = [UIColor grayColor];
         defaultStyle.font = [UIFont systemFontOfSize:12.0];
+        defaultStyle.animationType = JDStatusBarAnimationTypeMove;
         sharedInstance.defaultStyle = defaultStyle;
         
         // prepare userStyles
@@ -141,15 +142,15 @@
     [self.overlayWindow addSubview:self];
     [self.overlayWindow setHidden:NO];
     
+    self.topBar.backgroundColor = style.barColor;
     self.textLabel.textColor = style.textColor;
     self.textLabel.font = style.font;
     self.textLabel.frame = CGRectMake(0, 2, self.topBar.bounds.size.width, self.topBar.bounds.size.height-2);
     self.textLabel.text = status;
     
-    self.topBar.hidden = NO;
-    self.topBar.backgroundColor = style.barColor;
     [UIView animateWithDuration:0.4 animations:^{
         self.topBar.alpha = 1.0;
+        self.topBar.frame = CGRectMake(0, 0, self.overlayWindow.frame.size.width, [self statusBarHeight]);
     }];
     [self setNeedsDisplay];
 }
@@ -157,14 +158,27 @@
 - (void)dismiss;
 {
     [UIView animateWithDuration:0.4 animations:^{
-        self.topBar.alpha = 0.0;
+        if (self.defaultStyle.animationType == JDStatusBarAnimationTypeFade) {
+            self.topBar.alpha = 0.0;
+        } else {
+            self.topBar.frame = CGRectMake(0, -[self statusBarHeight],
+                                           self.overlayWindow.frame.size.width, [self statusBarHeight]);
+        }
     } completion:^(BOOL finished) {
         [self.topBar removeFromSuperview];
         _topBar = nil;
+        _textLabel = nil;
         
         [self.overlayWindow removeFromSuperview];
         _overlayWindow = nil;
     }];
+}
+
+#pragma mark helper
+
+- (CGFloat)statusBarHeight;
+{
+    return [[UIApplication sharedApplication] statusBarFrame].size.height;
 }
 
 #pragma mark lazy views
@@ -184,10 +198,17 @@
 - (UIView *)topBar;
 {
     if(_topBar == nil) {
-        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.overlayWindow.frame.size.width, 20.0)];
+        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.overlayWindow.frame.size.width, [self statusBarHeight])];
+        _topBar.clipsToBounds = YES;
         _topBar.alpha = 0.0;
         [self.topBar addSubview:self.textLabel];
         [self.overlayWindow addSubview:_topBar];
+        
+        if (self.defaultStyle.animationType == JDStatusBarAnimationTypeMove) {
+            self.topBar.alpha = 1.0;
+            self.topBar.frame = CGRectMake(0, -[self statusBarHeight],
+                                           self.overlayWindow.frame.size.width, [self statusBarHeight]);
+        }
     }
     return _topBar;
 }
@@ -215,6 +236,7 @@
     style.barColor = self.barColor;
     style.textColor = self.textColor;
     style.font = self.font;
+    style.animationType = self.animationType;
     return style;
 }
 
