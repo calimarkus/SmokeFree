@@ -132,12 +132,8 @@
     [[SFFileManager sharedInstance] loadBoxNetContentsWithProgress:^(NSString *filename) {
         [JDStatusBarNotification showWithStatus:[NSString stringWithFormat:@"Received file: %@", filename]];
     } completion:^{
-        [JDStatusBarNotification showWithStatus:@"Finished downloading files"];
-        double delayInSeconds = 1.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [JDStatusBarNotification dismiss];
-        });
+        [JDStatusBarNotification showWithStatus:@"Finished downloading files"
+                                   dismissAfter:1.0];
     }];
 }
 

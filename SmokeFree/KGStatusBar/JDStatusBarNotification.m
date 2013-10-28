@@ -84,7 +84,6 @@
 
 + (void)dismissAfter:(NSTimeInterval)delay;
 {
-    [[JDStatusBarNotification sharedInstance] dismiss];
     [JDStatusBarNotification performSelector:@selector(dismiss) withObject:self afterDelay:delay];
 }
 
