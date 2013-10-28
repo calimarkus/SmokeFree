@@ -1,5 +1,5 @@
 //
-//  JDStatusBarLabel.h
+//  JDStatusBarNotification.h
 //
 //  Based on KGStatusBar by Kevin Gibbon
 //
@@ -12,7 +12,7 @@
 @class JDStatusBarStyle;
 typedef JDStatusBarStyle*(^JDPrepareStyleBlock)(JDStatusBarStyle *style);
 
-@interface JDStatusBarLabel : UIView
+@interface JDStatusBarNotification : UIView
 
 + (void)showWithStatus:(NSString *)status;
 + (void)showWithStatus:(NSString *)status

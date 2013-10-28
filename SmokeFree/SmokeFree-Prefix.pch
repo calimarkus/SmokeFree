@@ -16,5 +16,5 @@
 
     #import "UIColor+SmokeFree.h"
     #import "UIView+position.h"
-    #import "JDStatusBarLabel.h"
+    #import "JDStatusBarNotification.h"
 #endif

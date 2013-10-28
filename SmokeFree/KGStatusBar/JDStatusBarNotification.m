@@ -1,5 +1,5 @@
 //
-//  JDStatusBarLabel.m
+//  JDStatusBarNotification.m
 //
 //  Based on KGStatusBar by Kevin Gibbon
 //
@@ -7,9 +7,9 @@
 //  Copyright 2013 Markus Emrich. All rights reserved.
 //
 
-#import "JDStatusBarLabel.h"
+#import "JDStatusBarNotification.h"
 
-@interface JDStatusBarLabel ()
+@interface JDStatusBarNotification ()
 @property (nonatomic, strong, readonly) UIWindow *overlayWindow;
 @property (nonatomic, strong, readonly) UIView *topBar;
 @property (nonatomic, strong, readonly) UILabel *textLabel;
@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSMutableDictionary *userStyles;
 @end
 
-@implementation JDStatusBarLabel
+@implementation JDStatusBarNotification
 
 @synthesize overlayWindow = _overlayWindow;
 @synthesize textLabel = _textLabel;
@@ -26,11 +26,11 @@
 
 #pragma mark class methods
 
-+ (JDStatusBarLabel*)sharedInstance {
++ (JDStatusBarNotification*)sharedInstance {
     static dispatch_once_t once;
-    static JDStatusBarLabel *sharedInstance;
+    static JDStatusBarNotification *sharedInstance;
     dispatch_once(&once, ^ {
-        sharedInstance = [[JDStatusBarLabel alloc] initWithFrame:
+        sharedInstance = [[JDStatusBarNotification alloc] initWithFrame:
                           [[UIScreen mainScreen] bounds]];
         
         // set defaults
@@ -78,13 +78,13 @@
 
 + (void)dismiss;
 {
-    [[JDStatusBarLabel sharedInstance] dismiss];
+    [[JDStatusBarNotification sharedInstance] dismiss];
 }
 
 + (void)dismissAfter:(NSTimeInterval)delay;
 {
-    [[JDStatusBarLabel sharedInstance] dismiss];
-    [JDStatusBarLabel performSelector:@selector(dismiss) withObject:self afterDelay:delay];
+    [[JDStatusBarNotification sharedInstance] dismiss];
+    [JDStatusBarNotification performSelector:@selector(dismiss) withObject:self afterDelay:delay];
 }
 
 + (void)setDefaultStyle:(JDPrepareStyleBlock)prepareBlock;
@@ -92,7 +92,7 @@
     NSAssert(prepareBlock != nil, @"No prepareBlock provided");
     
     JDStatusBarStyle *style = [[self sharedInstance].defaultStyle copy];
-    [JDStatusBarLabel sharedInstance].defaultStyle = prepareBlock(style);
+    [JDStatusBarNotification sharedInstance].defaultStyle = prepareBlock(style);
 }
 
 + (NSString*)addStyleNamed:(NSString*)identifier

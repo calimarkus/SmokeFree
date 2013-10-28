@@ -27,7 +27,7 @@
 		D25B437E181E9079006D034E /* 131027_0846.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4378181E9079006D034E /* 131027_0846.txt */; };
 		D25B437F181E9079006D034E /* 131027_1102.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B4379181E9079006D034E /* 131027_1102.txt */; };
 		D25B4380181E9079006D034E /* 131027_1103.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25B437A181E9079006D034E /* 131027_1103.txt */; };
-		D25B4386181E9DE4006D034E /* JDStatusBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B4385181E9DE4006D034E /* JDStatusBarLabel.m */; };
+		D25B4386181E9DE4006D034E /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B4385181E9DE4006D034E /* JDStatusBarNotification.m */; };
 		D29480C5181C119D00C51E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C4181C119D00C51E87 /* Foundation.framework */; };
 		D29480C7181C119D00C51E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C6181C119D00C51E87 /* CoreGraphics.framework */; };
 		D29480C9181C119D00C51E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29480C8181C119D00C51E87 /* UIKit.framework */; };
@@ -84,8 +84,8 @@
 		D25B4378181E9079006D034E /* 131027_0846.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_0846.txt; sourceTree = "<group>"; };
 		D25B4379181E9079006D034E /* 131027_1102.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_1102.txt; sourceTree = "<group>"; };
 		D25B437A181E9079006D034E /* 131027_1103.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 131027_1103.txt; sourceTree = "<group>"; };
-		D25B4384181E9DE4006D034E /* JDStatusBarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarLabel.h; sourceTree = "<group>"; };
-		D25B4385181E9DE4006D034E /* JDStatusBarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarLabel.m; sourceTree = "<group>"; };
+		D25B4384181E9DE4006D034E /* JDStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarNotification.h; sourceTree = "<group>"; };
+		D25B4385181E9DE4006D034E /* JDStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarNotification.m; sourceTree = "<group>"; };
 		D29480C1181C119D00C51E87 /* SmokeFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmokeFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29480C4181C119D00C51E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29480C6181C119D00C51E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -196,8 +196,8 @@
 		D25B4383181E9DE4006D034E /* KGStatusBar */ = {
 			isa = PBXGroup;
 			children = (
-				D25B4384181E9DE4006D034E /* JDStatusBarLabel.h */,
-				D25B4385181E9DE4006D034E /* JDStatusBarLabel.m */,
+				D25B4384181E9DE4006D034E /* JDStatusBarNotification.h */,
+				D25B4385181E9DE4006D034E /* JDStatusBarNotification.m */,
 			);
 			path = KGStatusBar;
 			sourceTree = "<group>";
@@ -433,7 +433,7 @@
 				D29480F5181C11D500C51E87 /* SFProfileViewController.m in Sources */,
 				D22CC274181C31C200A61CB9 /* UIImage+MaskedImage.m in Sources */,
 				D22CC26C181C23B800A61CB9 /* SFProfileHeaderView.m in Sources */,
-				D25B4386181E9DE4006D034E /* JDStatusBarLabel.m in Sources */,
+				D25B4386181E9DE4006D034E /* JDStatusBarNotification.m in Sources */,
 				D22CC27C181C345000A61CB9 /* UIView+position.m in Sources */,
 				D29480D5181C119D00C51E87 /* SFAppDelegate.m in Sources */,
 				D22CC26F181C277E00A61CB9 /* UIColor+SmokeFree.m in Sources */,
