@@ -12,7 +12,8 @@
 
 + (instancetype)sharedInstance;
 
-- (void)loadBoxNetContentsWithCompletion:(void(^)())completion;
+- (void)loadBoxNetContentsWithProgress:(void(^)(NSString *filename))progress
+                            completion:(void(^)())completion;
 
 - (NSArray*)existingFiles;
 - (NSArray*)fileContentsOfFileNamed:(NSString*)filename;

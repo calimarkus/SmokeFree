@@ -95,7 +95,16 @@
 - (void)refreshTriggered:(UIRefreshControl*)refreshControl;
 {
     __weak typeof(self) blockSelf = self;
-    [[SFFileManager sharedInstance] loadBoxNetContentsWithCompletion:^{
+    [[SFFileManager sharedInstance] loadBoxNetContentsWithProgress:^(NSString *filename) {
+        [KGStatusBar showWithStatus:[NSString stringWithFormat:@"Received file: %@", filename]];
+    } completion:^{
+        [KGStatusBar showWithStatus:@"Finished downloading files"];
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [KGStatusBar dismiss];
+        });
+        
         [refreshControl endRefreshing];
         [blockSelf reloadData];
         [self.tableView reloadData];

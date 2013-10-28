@@ -27,7 +27,8 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
 
 #pragma mark data loading
 
-- (void)loadBoxNetContentsWithCompletion:(void(^)())completion;
+- (void)loadBoxNetContentsWithProgress:(void(^)(NSString *filename))progress
+                            completion:(void (^)())completion;
 {
     // load shared folder contents
     [[BoxSDK sharedSDK].foldersManager folderItemsWithID:SFDetailsSharedBoxFolderID requestBuilder:nil success:^(BoxCollection *collection) {
@@ -39,10 +40,20 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
         // save files, if not existing already
         __block NSInteger openDownloads = files.count;
         for (BoxModel *model in files) {
+            NSString *filename = model.rawResponseJSON[@"name"];
             [self saveFileID:model.modelID
-                    filename:model.rawResponseJSON[@"name"]
+                    filename:filename
                     completion:^{
                         openDownloads--;
+                        
+                        // call progress
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (progress) {
+                                progress(filename);
+                            }
+                        });
+                        
+                        // call completion
                         if (openDownloads <= 0 && completion) {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 completion();
