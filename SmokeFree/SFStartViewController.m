@@ -126,7 +126,13 @@
 
 - (void)didReceiveAuthToken;
 {
-    [JDStatusBarLabel showWithStatus:@"Logged in to Box.net"];
+    [JDStatusBarLabel setDefaultStyle:^JDStatusBarStyle*(JDStatusBarStyle *style) {
+                                style.barColor = [UIColor smokeFreeBlue];
+                                style.textColor = [UIColor whiteColor];
+                                return style;
+                            }];
+    
+    [JDStatusBarLabel showWithStatus:@"Logged in into Box.net"];
     
     // start file download
     [[SFFileManager sharedInstance] loadBoxNetContentsWithProgress:^(NSString *filename) {

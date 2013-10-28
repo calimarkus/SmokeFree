@@ -9,26 +9,34 @@
 
 #import <UIKit/UIKit.h>
 
+@class JDStatusBarStyle;
+typedef JDStatusBarStyle*(^JDPrepareStyleBlock)(JDStatusBarStyle *style);
+
 @interface JDStatusBarLabel : UIView
 
 + (void)showWithStatus:(NSString *)status;
++ (void)showWithStatus:(NSString *)status
+             styleName:(NSString*)styleName;
 
 + (void)showWithStatus:(NSString *)status
           dismissAfter:(NSTimeInterval)timeInterval;
-
 + (void)showWithStatus:(NSString *)status
-              barColor:(UIColor*)barColor;
-
-+ (void)showWithStatus:(NSString *)status
-              barColor:(UIColor*)barColor
-             textColor:(UIColor*)textColor;
-
-+ (void)showWithStatus:(NSString *)status
-              barColor:(UIColor*)barColor
-             textColor:(UIColor*)textColor
-                  font:(UIFont*)font;
+          dismissAfter:(NSTimeInterval)timeInterval
+             styleName:(NSString*)styleName;
 
 + (void)dismiss;
 + (void)dismissAfter:(NSTimeInterval)delay;
 
++ (void)setDefaultStyle:(JDPrepareStyleBlock)prepareBlock;
++ (NSString*)addStyleNamed:(NSString*)identifier
+                   prepare:(JDPrepareStyleBlock)prepareBlock;
+
 @end
+
+@interface JDStatusBarStyle : NSObject <NSCopying>
+@property (nonatomic, strong) UIColor *barColor;
+@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIFont *font;
+@end
+
+
