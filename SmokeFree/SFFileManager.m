@@ -63,6 +63,11 @@ static NSString *const SFDetailsSharedBoxFolderID = @"1262497306";
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSDictionary *JSONDictionary) {
         NSLog(@"folder items error: %@", error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion) {
+                completion();
+            }
+        });
     }];
 }
 
