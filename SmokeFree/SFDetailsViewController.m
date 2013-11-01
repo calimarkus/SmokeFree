@@ -7,7 +7,7 @@
 //
 
 #import <BoxSDK/BoxSDK.h>
-#import <ios-linechart/LineChartView.h>
+#import <ios-linechart/LCLineChartView.h>
 #import <MessageUI/MessageUI.h>
 
 #import "SFFileManager.h"
@@ -40,7 +40,7 @@
     
     // replace line chart view (so correct initalizer is used)
     [self.lineChartView removeFromSuperview];
-    self.lineChartView = [[LineChartView alloc] initWithFrame:self.lineChartView.frame];
+    self.lineChartView = [[LCLineChartView alloc] initWithFrame:self.lineChartView.frame];
     self.lineChartView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.lineChartView showLegend:NO animated:NO];
     [self.view insertSubview:self.lineChartView belowSubview:self.topView];
@@ -132,7 +132,7 @@
     max = 1.0;
     
     // init linechart
-    LineChartData *actualData = [LineChartData new];
+    LCLineChartData *actualData = [[LCLineChartData alloc] init];
     actualData.xMin = 0;
     actualData.xMax = normalizedData.count;
     actualData.title = @"Smoke Amount";
@@ -144,7 +144,7 @@
         float y = [data[@"intensity"] floatValue];
         NSString *xLabel = data[@"time"];
         NSString *yLabel = [NSString stringWithFormat:@"%f", y];
-        return [LineChartDataItem dataItemWithX:x y:y xLabel:xLabel dataLabel:yLabel];
+        return [LCLineChartDataItem dataItemWithX:x y:y xLabel:xLabel dataLabel:yLabel];
     };
     
     self.lineChartView.yMin = min;

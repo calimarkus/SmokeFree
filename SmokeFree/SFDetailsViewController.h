@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class SFFile;
-@class LineChartView;
+@class LCLineChartView;
 
 @interface SFDetailsViewController : UIViewController
 
@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (strong, nonatomic) IBOutlet LineChartView *lineChartView;
+@property (strong, nonatomic) IBOutlet LCLineChartView *lineChartView;
 
 @property (nonatomic, strong) SFFile *file;
 

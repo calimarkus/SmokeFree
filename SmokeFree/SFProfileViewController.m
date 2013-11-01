@@ -94,6 +94,9 @@
 
 - (void)refreshTriggered:(UIRefreshControl*)refreshControl;
 {
+    [JDStatusBarNotification showWithStatus:@"Reloading Box.net…"];
+    [JDStatusBarNotification showActivityIndicator:YES indicatorStyle:UIActivityIndicatorViewStyleWhite];
+    
     __weak typeof(self) blockSelf = self;
     [[SFFileManager sharedInstance] loadBoxNetContentsWithProgress:^(NSString *filename) {
         [JDStatusBarNotification showWithStatus:[NSString stringWithFormat:@"Received file: %@", filename]];
